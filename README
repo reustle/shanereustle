@@ -1,6 +1,6 @@
 ShaneReustle.com created using Bottle.py ( http://bottle.paws.de/ )
 
-Note: settings.py is not included in the repo. This is what it looks like.
+** Note: settings.py is not included in the repo. This is what it looks like.
 
 # Enable Debug Mode
 DEBUG = False
@@ -17,3 +17,6 @@ DB_PASS = "mongodb_password"
 
 # Cookie Salt
 COOKIE_SALT = "many_crazy_characters_here"
+
+# Common Date Format
+DATE_FORMAT = "%b %e %Y"

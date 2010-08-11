@@ -1,5 +1,6 @@
 from bottle import view, route, redirect
 from models import BlogClass
+import settings
 
 blog = BlogClass()
 
@@ -26,7 +27,7 @@ def view_blog_entry(entry_query):
 	}
 	output["meta_title"] = output["entry"]["title"]
 	
-	output["entry"]["timestamp"] = output["entry"]["timestamp"].strftime("%B %e %Y")
+	output["entry"]["timestamp"] = output["entry"]["timestamp"].strftime( settings.DATE_FORMAT )
 	
 	return output
 
@@ -47,14 +48,14 @@ def view_blog_search():
 @route("/blog/search/:search_query")
 @route("/blog/search/:search_query/")
 @view("templates/blog_search")
-def view_blog_search_results(search_query="none"):
+def view_blog_search_results(search_query):
 	output = {
 		"meta_title":"Blog Search Results: "+search_query,
 		"search_query": search_query,
 		"entries": blog.search_entries(search_query)
 	}
 	for entry in output["entries"]:
-		entry["timestamp"] = entry["timestamp"].strftime("%b %e %Y")
+		entry["timestamp"] = entry["timestamp"].strftime( settings.DATE_FORMAT )
 	
 	return output
 
@@ -68,7 +69,7 @@ def view_blog_archive():
 		"entries":blog.get_entries()
 	}
 	for entry in output["entries"]:
-		entry["timestamp"] = entry["timestamp"].strftime("%b %e %Y")
+		entry["timestamp"] = entry["timestamp"].strftime( settings.DATE_FORMAT )
 	
 	return output
 
@@ -83,5 +84,5 @@ def view_blog_archive():
 
 run()</code></pre>
 <p>I love the use of decorators for URL routing, and it makes easy to take URL arguments too. Anyway, I liked Bottle.py so much, I decided to use it to write the blog you are currently on. It took me one evening to finish, and I am more than happy with how it turned out. Another exciting thing about the blog is that it is my first site in production using <a href=\"http://mongodb.org\">MongoDB</a>. I will go into more detail about my experience sofar with MongoDB in a later blog post.</p>
-<p>If you didn't know, the source of the site is <a href=\"http://bitbucket.org/crath/shanereustle.com/\">available here</a>.</p>
+<p>If you didn't know, the source of the site is <a href=\"http://github.com/Reustle/ShaneReustle/\">available here</a>.</p>
 """

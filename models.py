@@ -6,7 +6,7 @@ from datetime import datetime, timedelta
 import settings
 
 class DatabaseClass():
-	mongohq = 0
+	mongohq = None
 	def connect(self):
 		self.mongohq = Connection( settings.DB_SERVER , settings.DB_PORT )
 		self.authenticate()
@@ -32,7 +32,7 @@ class BlogClass():
 	def get_entries(self):
 		db.keep_alive()
 		
-		#return list( mongohq.shanereustle.blog.find().sort({"date":1}).skip(skip).limit(limit) )
+		#return list( mongohq.shanereustle.blog.find().sort("date",1).skip(skip).limit(limit) )
 		return list( db.mongohq.shanereustle.blog.find().limit(6) )
 	
 	def get_entry(self, entry_query):
