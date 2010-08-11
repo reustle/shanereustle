@@ -1,0 +1,19 @@
+ShaneReustle.com created using Bottle.py ( http://bottle.paws.de/ )
+
+Note: settings.py is not included in the repo. This is what it looks like.
+
+# Enable Debug Mode
+DEBUG = False
+AUTO_RELOAD = False
+
+# Project Path
+PROJECT_PATH = "/path/to/project"
+
+# MongoDB Settings
+DB_PORT = 12345
+DB_SERVER = "mongodb_server"
+DB_USER = "mongodb_username"
+DB_PASS = "mongodb_password"
+
+# Cookie Salt
+COOKIE_SALT = "many_crazy_characters_here"
