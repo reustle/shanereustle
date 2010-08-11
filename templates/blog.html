@@ -1,0 +1,6 @@
+%rebase templates/layout meta_title=meta_title
+				<div class="btn_tray">[ <a href="/blog/archive/" class="">View Archive</a> - <a href="/blog/search/" class="">Search</a> ]</div>
+%for entry in entries:
+				<h1><a href="/blog/{{entry["url_hash"]}}">{{entry["title"]}}</a></h1>
+				{{!entry["body"]}}
+%end

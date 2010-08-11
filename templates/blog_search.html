@@ -1,0 +1,23 @@
+%rebase templates/layout meta_title=meta_title
+				<div class="btn_tray">[ <a href="/blog/archive/" class="">View Archive</a> - <a href="/blog/search/" class="">Search</a> ]</div>
+%if search_query == "":
+				<h1>Search Blog by Keyword</h1>
+				<p>
+%for keyword in keywords:
+					<a href="/blog/search/{{keyword}}/">{{keyword}}</a><br/>
+%end
+				</p>
+%else:
+				<h1>Search Results</h1>
+%if entries != []:
+				<ul class="no_bullets">
+%for entry in entries:
+					<li>
+						<a href="/blog/{{entry["url_hash"]}}">{{entry["title"]}}</a>
+						<i>({{entry["timestamp"]}})</i>
+%end
+				</ul>
+%else:
+				<p><i>Sorry, I could not find any related entries. You can try <a href="/blog/search/">searching by keyword</a>.</i></p>
+%end
+%end
