@@ -3,6 +3,6 @@
 				<h1>Blog Archive</h1>
 				<ul class="no_bullets">
 %for entry in entries:
-					<li><a href="/blog/{{entry["url_hash"]}}">{{entry["title"]}}</a> <i>({{entry["timestamp"]}})</i></li>
+					<li><a href="/blog/{{entry["slug"]}}">{{entry["title"]}}</a> <i>({{entry["timestamp"]}})</i></li>
 %end
 				</ul>

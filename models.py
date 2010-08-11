@@ -38,7 +38,7 @@ class BlogClass():
 	def get_entry(self, entry_query):
 		db.keep_alive()
 		
-		return db.mongohq.shanereustle.blog.find_one({"url_hash":entry_query})
+		return db.mongohq.shanereustle.blog.find_one({"slug":entry_query})
 	
 	def search_entries(self, search_query):
 		db.keep_alive()
