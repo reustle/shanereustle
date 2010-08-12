@@ -33,22 +33,26 @@ class BlogClass():
 		db.keep_alive()
 		
 		#return list( mongohq.shanereustle.blog.find().sort("date",1).skip(skip).limit(limit) )
-		return list( db.mongohq.shanereustle.blog.find().limit(6) )
+		return list( db.mongohq.shanereustle.blog.find({ "published":True }).sort("timestamp",-1).limit(6) )
 	
 	def get_entry(self, entry_query):
 		db.keep_alive()
 		
-		return db.mongohq.shanereustle.blog.find_one({"slug":entry_query})
+		entry = db.mongohq.shanereustle.blog.find_one({"slug":entry_query})
+		if entry != None and entry["published"]:
+			return entry
+		else:
+			return None
 	
 	def search_entries(self, search_query):
 		db.keep_alive()
 		
-		return list( db.mongohq.shanereustle.blog.find({"keywords":search_query}) )
+		return list( db.mongohq.shanereustle.blog.find({ "keywords":search_query , "published":True }) )
 	
 	def list_keywords(self):
 		db.keep_alive()
 		
-		entries = list( db.mongohq.shanereustle.blog.find() )
+		entries = list( db.mongohq.shanereustle.blog.find({ "published":True }) )
 		keywords = {}
 		for entry in entries:
 			for keyword in entry["keywords"]:
