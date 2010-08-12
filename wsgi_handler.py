@@ -6,9 +6,3 @@ sys.path.append(os.path.dirname(__file__))
 import app
 
 application = app.default_app()
-
-
-
-
-
-

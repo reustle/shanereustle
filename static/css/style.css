@@ -13,27 +13,27 @@ body {
 	margin: 25px auto;
 	background: #fff;
 }
-#navigation2 {
+#navigation {
 	background: #cdcdcd url('/static/images/navigation_bg.jpg') top left repeat-x;
 	list-style: none;
 	margin: 0px;
 	padding: 0px 0px;
 	border-bottom: 1px solid #cdcdcd;
 }
-	#navigation2 .right {
+	#navigation .right {
 		float: right;
 		padding: 4px 10px 0px 0px;
 		font-weight: bold;
 		cursor: default;
 	}
-		#navigation2 .right span {
+		#navigation .right span {
 			color: #0066ff;
 		}
-	#navigation2 li {
+	#navigation li {
 		display: inline;
 		padding: 0px;
 	}
-	#navigation2 li a {
+	#navigation li a {
 		display: inline-block;
 		list-style-type: none;
 		text-decoration: none;
@@ -41,37 +41,11 @@ body {
 		color: #000;
 		padding: 4px 10px;
 	}
-		#navigation2 li a:hover {
+		#navigation li a:hover {
 			color: #0066ff;
 			background: url('/static/images/navigation_bg.jpg') 0px -30px repeat-x;
 		}
 
-#navigation {
-	background: #cdcdcd url('/static/images/navigation_bg.jpg') top left repeat-x;
-	padding: 4px 0px;
-	border-bottom: 1px solid #cdcdcd;
-	cursor: default;
-	
-	display: none;
-}
-	#navigation a {
-		color: #000;
-		text-decoration: none;
-		padding: 4px 10px;
-		border-right: 1px solid #cdcdcd;
-	}
-	#navigation a:hover {
-		color: #0066ff;
-		background: url('/static/images/navigation_bg.jpg') 0px -30px repeat-x;
-	}
-	#navigation span {
-		float: right;
-		padding-right: 10px;
-		font-weight: bold;
-	}
-		#navigation span b {
-			color: #0066ff;
-		}
 #content {
 	padding: 0px 10px;
 	line-height: 14pt;
