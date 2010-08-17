@@ -17,7 +17,7 @@ class DatabaseClass():
 	
 	def keep_alive(self):
 		try:
-			self.mongohq.shanereustle.content.find_one()
+			self.mongohq.shanereustle.blog.find_one()
 		except (AutoReconnect, OperationFailure):
 			self.authenticate()
 		
