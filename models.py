@@ -16,7 +16,10 @@ class DatabaseClass():
 		self.mongohq.shanereustle.log.insert({ "type":"notice" , "message":"Authenticating MongoHQ Connection","timestamp": ( datetime.today() - timedelta(hours=4)  )   })
 	
 	def keep_alive(self):
-		self.authenticate()
+		try:
+			self.mongohq.martinmoto.content.find_one()
+		except (AutoReconnect, OperationFailure):
+			self.authenticate()
 		
 db = DatabaseClass()
 db.connect()
