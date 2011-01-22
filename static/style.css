@@ -1,0 +1,81 @@
+@font-face {
+	font-family: "droid_sans";
+	src: url("fonts/droid_sans.eot");
+	src: local("☺"),
+		url("fonts/droid_sans.woff") format("woff"),
+		url("fonts/droid_sans.ttf") format("truetype"),
+		url("fonts/droid_sans.svg#webfontKYIQSBQk") format("svg");
+	font-weight: normal;
+	font-style: normal;
+}
+body {
+	background: #222;
+	margin: 0px;
+	padding: 0px;
+	border-width: 0px;
+	font-family: "droid_sans", Arial, Helvetica, sans-serif;
+	cursor: default;
+	text-align: center;
+	color: #ddd;
+}
+a {
+	color: #ddd;
+	-webkit-transition-timing-function: ease-out;
+	-webkit-transition-duration: 500ms;
+}
+	a:hover {
+		color: #d00;
+		-webkit-transition-timing-function: ease-out;
+		-webkit-transition-duration: 500ms;
+	}
+#wrapper {
+	margin: 12% auto 10px auto;
+	min-width: 560px;
+}
+#header {
+	margin: 0px;
+	padding: 0px;
+	text-transform: uppercase;
+	font-size: 36pt;
+}
+	#header span {
+		color: #d00;
+	}
+#details {
+	margin: 10px 0px 10px 0px;
+	padding: 0px;
+	font-size: 11pt;
+	text-align: center;
+	line-height: 18pt;
+}
+#links {
+	margin: 0px;
+	font-size: 12pt;
+	padding: 8px 0px;
+}
+	#links li {
+		display: inline;
+		list-style-type: none;
+		padding: 8px 0px;
+	}
+		#links li a {
+			padding: 8px 9px;
+		}
+#email_form {
+	display: none;
+	margin: 20px 0px 0px 0px;
+}
+	#email_form input[type="text"], #email_form textarea {
+		width: 450px;
+		border-width: 0px;
+		padding: 4px;
+		font-size: 12pt;
+		font-family: "droid_sans", arial, helvetica, sans-serif;
+		display: block;
+		margin: 15px auto;
+	}
+	#email_form input[type="button"], #email_form input[type="submit"] {
+		padding: 4px 8px;
+		font-size: 12pt;
+	}
+

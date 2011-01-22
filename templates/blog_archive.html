@@ -1,8 +1,0 @@
-%rebase templates/layout meta_title=meta_title
-				<div class="btn_tray">[ <a href="/blog/archive/" class="">View Archive</a> - <a href="/blog/search/" class="">Search</a> ]</div>
-				<h1>Blog Archive</h1>
-				<ul class="no_bullets">
-%for entry in entries:
-					<li><a href="/blog/{{entry["slug"]}}">{{entry["title"]}}</a> <i>({{entry["timestamp"]}})</i></li>
-%end
-				</ul>

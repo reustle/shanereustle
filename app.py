@@ -1,10 +1,7 @@
-from bottle import debug, route, static_file, run, error, default_app
+from bottle import debug, route, static_file, run
 import settings
-from views.about import *
-from views.projects import *
-from views.clients import *
-from views.contact import *
-from views.blog import *
+from controllers.index import *
+from controllers.email import *
 
 debug(settings.DEBUG)
 
@@ -14,3 +11,4 @@ def static(filename):
 
 if __name__ == "__main__":
 	run( reloader=settings.AUTO_RELOAD )
+

@@ -9,14 +9,3 @@ AUTO_RELOAD = False
 # Project Path
 PROJECT_PATH = "/path/to/project"
 
-# MongoDB Settings
-DB_PORT = 12345
-DB_SERVER = "mongodb_server"
-DB_USER = "mongodb_username"
-DB_PASS = "mongodb_password"
-
-# Cookie Salt
-COOKIE_SALT = "many_crazy_characters_here"
-
-# Common Date Format
-DATE_FORMAT = "%b %e %Y"
