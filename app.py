@@ -1,4 +1,4 @@
-from bottle import debug, route, static_file, run
+from bottle import debug, route, static_file, run, default_app
 import settings
 from controllers.index import *
 from controllers.email import *
