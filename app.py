@@ -10,5 +10,5 @@ def static(filename):
 	return static_file(filename, root=settings.PROJECT_PATH+"/static")
 
 if __name__ == "__main__":
-	run( reloader=settings.AUTO_RELOAD )
+	run(reloader=settings.AUTO_RELOAD)
 
