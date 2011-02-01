@@ -10,7 +10,11 @@ $("#email_btn").attr("href","#/").click(function(){
 })
 
 $("#send_email").click(function(){
-	alert("Sorry, this form doesn't work yet.")
+	// Show user that something is happening
+	
+	$.post("/email/", {"name":"myname", "email":"myemail", "phone":"myphone", "message":"mymsg"}, function(response){
+		alert(response)
+	})
 })
 
 $("#cancel_btn").click(function(){
