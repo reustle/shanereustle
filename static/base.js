@@ -13,7 +13,11 @@ $("#send_email").click(function(){
 	// Show user that something is happening
 	
 	$.post("/email/", {"name":"myname", "email":"myemail", "phone":"myphone", "message":"mymsg"}, function(response){
-		alert(response)
+		if(response == "1"){
+			alert("message success")
+		}else{
+			alert("message failed")
+		}
 	})
 })
 
