@@ -1,11 +1,2 @@
-ShaneReustle.com created using Bottle.py ( http://bottle.paws.de/ )
-
-** Note: settings.py is not included in the repo. This is what it looks like.
-
-# Enable Debug Mode
-DEBUG = False
-AUTO_RELOAD = False
-
-# Project Path
-PROJECT_PATH = "/path/to/project"
+ShaneReustle.com was created using Bottle.py ( http://bottle.paws.de/ )
 

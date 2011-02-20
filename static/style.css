@@ -59,23 +59,5 @@ a {
 		padding: 8px 0px;
 	}
 		#links li a {
-			padding: 8px 9px;
+			padding: 8px 6px;
 		}
-#email_form {
-	display: none;
-	margin: 20px 0px 0px 0px;
-}
-	#email_form input[type="text"], #email_form textarea {
-		width: 450px;
-		border-width: 0px;
-		padding: 4px;
-		font-size: 12pt;
-		font-family: "droid_sans", arial, helvetica, sans-serif;
-		display: block;
-		margin: 15px auto;
-	}
-	#email_form input[type="button"], #email_form input[type="submit"] {
-		padding: 4px 8px;
-		font-size: 12pt;
-	}
-
