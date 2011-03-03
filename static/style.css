@@ -28,7 +28,7 @@ a {
 		-webkit-transition-timing-function: ease-out;
 		-webkit-transition-duration: 500ms;
 	}
-#wrapper {
+#torso {
 	margin: 12% auto 10px auto;
 	min-width: 560px;
 }
@@ -61,3 +61,4 @@ a {
 		#links li a {
 			padding: 8px 6px;
 		}
+
