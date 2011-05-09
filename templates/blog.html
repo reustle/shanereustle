@@ -1,0 +1,37 @@
+<!DOCTYPE html>
+<html lang="en">
+	<head>
+		<meta charset="utf-8" />
+		<title>{{title}}</title>
+		<style type="text/css">
+			body {
+				font-family: helvetica, arial, sans-serif;
+			}
+			pre {
+				padding: 10px;
+				background: #e0e0e0;
+			}
+			#wrapper {
+				margin-left: 15px;
+				width: 800px;
+				line-height: 18pt;
+			}
+		</style>
+	</head>
+	<body>
+		<div id="wrapper">
+%include
+		</div>
+		<script type="text/javascript">
+			var _gaq = [['_setAccount', 'UA-2580539-1'], ['_trackPageview']];
+			(function() {
+				var ga = document.createElement('script');
+				ga.type = 'text/javascript';
+				ga.async = true;
+				ga.src = ('https:' == document.location.protocol ? 'https://ssl' : 'http://www') + '.google-analytics.com/ga.js';
+				var s = document.getElementsByTagName('script')[0];
+				s.parentNode.insertBefore(ga, s);
+			})();
+		</script>
+	</body>
+</html>
