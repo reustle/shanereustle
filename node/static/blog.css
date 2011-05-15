@@ -1,0 +1,28 @@
+body {
+	font-family: helvetica, arial, sans-serif;
+	background: #f0f1eb;
+	text-align: center;
+}
+pre {
+	padding: 10px;
+	background: #efefef;
+}
+#wrapper {
+	margin: 15px auto 15px auto;
+	background: #fff;
+	border: 1px solid #dcdcdc;
+	padding: 10px 30px;
+	text-align: left;
+	width: 800px;
+	line-height: 18pt;
+}
+h1 {
+	font-size: 20pt;
+}
+h2 {
+	font-size: 12pt;
+}
+a {
+	color: #000;
+}
+		
