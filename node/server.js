@@ -1,22 +1,17 @@
 var http = require('http');
 var fs = require('fs');
+require.paths.unshift('.');
+var async = require('lib/async');
 
 var template_cache = {};
 function load_template(path, callback){
 	if(typeof(template_cache[path]) === 'undefined'){
 		fs.readFile(path, 'utf8', function(err, data){
-			if(err){
-				throw err;
-				// TODO: Return error
-				//res.writeHead(404, {'Content-Type': 'text/plain'});
-				//res.end();
-			}else{
-				template_cache[path] = data;
-				callback(data);
-			}
+			template_cache[path] = data;
+			callback(err, data);
 		});
 	}else{
-		callback(template_cache[path]);
+		callback(null, template_cache[path]);
 	}
 }
 
@@ -27,7 +22,7 @@ http.createServer(function(req, res){
 	// TODO: Match urls with regex
 	if(req.url == '/'){
 		// Match URL: /
-		load_template('templates/index.html', function(template){
+		load_template('templates/index.html', function(err, template){
 			res.writeHead(200, {'Content-Type': 'text/html'});
 			res.end(template + '\n');
 		});
@@ -36,17 +31,24 @@ http.createServer(function(req, res){
 		if(url.length == 2 || url[2].length < 1){
 			// Match URL: /blog/
 			
-			// TODO: Read files in parallel
-			load_template('templates/blog.html', function(template){
+			function callback(){
+				console.log('callme');
+			}
+			
+			async.parallel({
+				'template': function(callback){
+					load_template('templates/blog.html', callback);
+				},
+				'blog_index': function(callback){
+					load_template('templates/blog_index.html', callback);
+				}
+			}, function(err, response){
+				var template = response.template;
+				template = template.replace('{{title}}', 'Blog &#124; Shane Reustle');
+				template = template.replace('{{body}}', response.blog_index);
 				
-				load_template('templates/blog_index.html', function(blog_index){
-					template = template.replace('{{title}}', 'Blog &#124; Shane Reustle');
-					template = template.replace('{{body}}', blog_index);
-					
-					res.writeHead(200, {'Content-Type': 'text/html'});
-					res.end(template + '\n');
-					
-				});
+				res.writeHead(200, {'Content-Type': 'text/html'});
+				res.end(template + '\n');
 				
 			});
 			
@@ -60,22 +62,24 @@ http.createServer(function(req, res){
 				return false;
 			}
 			
-			// TODO: Read files in parallel
-			load_template('templates/blog.html', function(template){
+			async.parallel({
+				'template': function(callback){
+					load_template('templates/blog.html', callback);
+				},
+				'entry': function(callback){
+					var entry_filename = 'templates/blog_entries/' + url[2] + '.html';
+					load_template(entry_filename, callback);
+				}
+			}, function(err, response){
+				// TODO: This is ugly. Regex maybe?
+				var entry_title = response.entry.split('\n')[0].replace('<h1>', '').replace('</h1>', '');
 				
-				var entry_filename = 'templates/blog_entries/' + url[2] + '.html';
-				load_template(entry_filename, function(entry){
-					
-					// TODO: This is ugly. Regex maybe?
-					var entry_title = entry.split('\n')[0].replace('<h1>', '').replace('</h1>', '');
-					
-					template = template.replace('{{title}}', entry_title + ' &#124; Shane Reustle');
-					template = template.replace('{{body}}', entry);
-					
-					res.writeHead(200, {'Content-Type': 'text/html'});
-					res.end(template + '\n');
-					
-				});
+				var template = response.template;
+				template = template.replace('{{title}}', entry_title + ' &#124; Shane Reustle');
+				template = template.replace('{{body}}', response.entry);
+				
+				res.writeHead(200, {'Content-Type': 'text/html'});
+				res.end(template + '\n');
 				
 			});
 			
