@@ -1,31 +1,40 @@
 html {
 	overflow-y: scroll;
+	height: 100%;
 }
 body {
-	font-family: helvetica, arial, sans-serif;
-	background: #f0f1eb;
+	font-family: arial, helvetica, sans-serif;
+	background: #f4f4f4;
+	color: #333;
+	height: 100%;
 	text-align: center;
 }
 pre {
 	padding: 10px;
+	font-size: 10pt;
 	background: #efefef;
+	overflow: auto;
 }
 #wrapper {
-	margin: 15px auto 15px auto;
+	margin: -10px auto;
 	background: #fff;
-	border: 1px solid #dcdcdc;
-	padding: 10px 30px;
+	padding: 0px 20px;
 	text-align: left;
-	width: 800px;
-	line-height: 18pt;
+	width: 700px;
+	min-height: 100%;
+	font-size: 0.8125em;
+	line-height: 1.3077em;
+	
+	-webkit-box-shadow: 0px 0px 10px 5px #ddd;
+	-moz-box-shadow: 0px 0px 10px 5px #ddd;
+	box-shadow: 0px 0px 10px 5px #ddd;
 }
 h1 {
-	font-size: 20pt;
-}
-h2 {
-	font-size: 12pt;
+	font-size: 16pt;
+	margin: 0px;
+	padding: 15px 0px 5px 0px;
 }
 a {
 	color: #000;
 }
-		
+
