@@ -16,6 +16,7 @@ function load_template(path, callback){
 }
 
 function error_handler(err, res){
+	//TODO: Handle Errors
 	if(err){
 		res.end('ERROR');
 		return true;
@@ -123,6 +124,6 @@ http.createServer(function(req, res){
 
 	}
 	
-}).listen(1337, '127.0.0.1');
-console.log('ShaneReustle.com app listening on 127.0.0.1:1337');
+}).listen(8001, '127.0.0.1');
+console.log('ShaneReustle.com app listening on 127.0.0.1:8001');
 

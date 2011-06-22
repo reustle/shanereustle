@@ -3,24 +3,11 @@
 	<head>
 		<meta charset='utf-8'/>
 		<title>{{title}}</title>
-		<style type='text/css'>
-			body {
-				font-family: helvetica, arial, sans-serif;
-			}
-			pre {
-				padding: 10px;
-				background: #efefef;
-			}
-			#wrapper {
-				margin-left: 15px;
-				width: 800px;
-				line-height: 18pt;
-			}
-		</style>
+		<link rel='stylesheet' href='/static/blog.css'/>
 	</head>
 	<body>
 		<div id='wrapper'>
-%include
+{{body}}
 		</div>
 		<script type='text/javascript'>
 			var _gaq = [['_setAccount', 'UA-2580539-1'], ['_trackPageview']];

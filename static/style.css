@@ -1,10 +1,10 @@
 @font-face {
-	font-family: "droid_sans";
-	src: url("fonts/droid_sans.eot");
-	src: local("☺"),
-		url("fonts/droid_sans.woff") format("woff"),
-		url("fonts/droid_sans.ttf") format("truetype"),
-		url("fonts/droid_sans.svg#webfontKYIQSBQk") format("svg");
+	font-family: 'droid_sans';
+	src: url('fonts/droid_sans.eot');
+	src: local('☺'),
+		url('fonts/droid_sans.woff') format('woff'),
+		url('fonts/droid_sans.ttf') format('truetype'),
+		url('fonts/droid_sans.svg#webfontKYIQSBQk') format('svg');
 	font-weight: normal;
 	font-style: normal;
 	}
@@ -15,7 +15,7 @@ body {
 	padding: 0px;
 	border-width: 0px;
 	border-top: 3px solid #d00;
-	font-family: "droid_sans", Arial, Helvetica, sans-serif;
+	font-family: 'droid_sans', Arial, Helvetica, sans-serif;
 	cursor: default;
 	text-align: center;
 	color: #ddd;
@@ -44,7 +44,7 @@ a {
 		color: #d00;
 		}
 
-#torso {
+#wrapper {
 	margin: 12% auto 10px auto;
 	min-width: 560px;
 	}
