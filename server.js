@@ -51,10 +51,14 @@ http.createServer(function(req, res){
 		filetype = types[filetype[filetype.length -1]];
 		
 		fs.readFile(filename, 'binary', function(err, data){
-			if(err){ throw err }
-			res.writeHead(200, {'Content-Type': filetype});
-			res.write(data, 'binary');
-			res.end();
+			if(err){
+				res.writeHead(404, {'Content-Type': 'plain/text'});
+				res.end();
+			}else{
+				res.writeHead(200, {'Content-Type': filetype});
+				res.write(data, 'binary');
+				res.end();
+			}
 		});
 	
 	}else if( /^\/blog\/?$/.test(req.url)){
