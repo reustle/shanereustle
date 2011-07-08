@@ -7,7 +7,7 @@ var template_cache = {};
 function load_template(path, callback){
 	if(typeof(template_cache[path]) === 'undefined'){
 		fs.readFile(path, 'utf8', function(err, data){
-			template_cache[path] = data;
+			//template_cache[path] = data;
 			callback(err, data);
 		});
 	}else{
@@ -16,11 +16,12 @@ function load_template(path, callback){
 }
 
 function error_handler(err, res){
-	//TODO: Handle Errors
 	if(err){
-		res.end('ERROR');
+		res.writeHead(500, {'Content-Type': 'text/plain'});
+		res.end();
 		return true;
 	}
+	return false;
 }
 
 http.createServer(function(req, res){
@@ -51,14 +52,11 @@ http.createServer(function(req, res){
 		filetype = types[filetype[filetype.length -1]];
 		
 		fs.readFile(filename, 'binary', function(err, data){
-			if(err){
-				res.writeHead(404, {'Content-Type': 'plain/text'});
-				res.end();
-			}else{
-				res.writeHead(200, {'Content-Type': filetype});
-				res.write(data, 'binary');
-				res.end();
-			}
+			if(error_handler(err, res)){return}
+			
+			res.writeHead(200, {'Content-Type': filetype});
+			res.write(data, 'binary');
+			res.end();
 		});
 	
 	}else if( /^\/blog\/?$/.test(req.url)){
