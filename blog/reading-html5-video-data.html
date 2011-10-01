@@ -23,7 +23,7 @@
 <p>Once you have your video piped into a canvas, you can use the <strong>getImageData</strong> method on the canvas to pull the current frame. This will return an ImageData object which includes a CanvasPixelArray list named data. The length of this list is <strong>video_width * video_height * 4</strong>, commonly known as RGBA format. For every pixel there is a red, green, blue and alpha value. By using every pixel on the canvas (or every 4 in our case, to increase speed), we are able to calculate the average color of the frame. In the example below, I set the average frame color as the background at 30fps. You can also see the average frame color listed below the video.</p>
 
 <video id='my_video' height='266' width='640' controls loop>
-	<source src='../static/misc/cars2.webm' type='video/webm'/>
+	<source src='resources/cars2.webm' type='video/webm'/>
 </video>
 <canvas id='my_canvas'></canvas>
 <div id="current_rgb">&nbsp;</div>
