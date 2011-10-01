@@ -1,0 +1,90 @@
+<!doctype html>
+<html lang='en'>
+	<head>
+		<meta charset='utf-8'/>
+		<title>Reading HTML5 Video Data | Shane Reustle</title>
+		<link rel='stylesheet' href='../static/css/blog.css'/>
+		<link rel='canonical' href='http://shanereustle.com/blog/force-screen-resolutions-on-ubuntu.html'/>
+		<style>
+			#my_video {
+				margin-left: 30px;
+			}
+			#my_canvas {
+				display: none;
+			}
+		</style>
+	</head>
+	<body>
+		<div id='wrapper'>
+
+<h1>Reading HTML5 Video Data</h1>
+<h2 class='date'>30 September 2011</h2>
+<p>One of the cooler features I've found in HTML5&#39;s new &#60;video&#62; tag is the ability to easily stream its content to a canvas. By passing the video element to the <strong>drawImage</strong> method of a canvas, along with some size parameters, you're able to create a duplicate output of the video. This opens up a whole new set of options for what you can do with your video data. We're going to use it to find the average color of the frame.</p>
+<p>Once you have your video piped into a canvas, you can use the <strong>getImageData</strong> method on the canvas to pull the current frame. This will return an ImageData object which includes a CanvasPixelArray list named data. The length of this list is <strong>video_width * video_height * 4</strong>, commonly known as RGBA format. For every pixel there is a red, green, blue and alpha value. By using every pixel on the canvas (or every 4 in our case, to increase speed), we are able to calculate the average color of the frame. In the example below, I set the average frame color as the background at 30fps. You can also see the average frame color listed below the video.</p>
+
+<video id='my_video' height='266' width='640' controls loop>
+	<source src='resources/cars2.webm' type='video/webm'/>
+</video>
+<canvas id='my_canvas'></canvas>
+<div id="current_rgb">&nbsp;</div>
+
+<p>If you take a look at the source code of this page, it should be fairly clear as to how it works. To reiterate, I am playing a video using the new HTML5 &#60;video&#62; tag, which is hidden. I then stream that video data into a canvas, which I read 30 times per second. Every time I read the canvas, I figure out the average color and set that as the background color. In my next blog post, I will work on moving some of these expensive calculations out of the main event loop using web workers.</p>
+
+<script>
+	
+	// Main elements
+	var body = document.getElementsByTagName('body')[0];
+	var current_rgb = document.getElementById('current_rgb');
+	var my_video = document.getElementById('my_video');
+	var my_canvas = document.getElementById('my_canvas');
+	var my_canvas_context = my_canvas.getContext('2d');
+	var worker = new Worker('resources/avg_frame_color.js');
+	
+	function update_bg(){
+		
+		// If the video isn't playing, don't loop
+		if(my_video.paused || my_video.ended){
+			return false;
+		}
+		
+		// Draw the current frame of the video onto the hidden canvas
+		my_canvas_context.drawImage(my_video, 0, 0, my_video.width/2, my_video.height/2);
+		
+		// Pull the image data from the canvas
+		var frame_data = my_canvas_context.getImageData(0, 0, my_video.width/2, my_video.height/2).data;
+		
+		worker.postMessage(frame_data);
+		
+		// Repeat every 1/10th of a second
+		setTimeout(update_bg, 100);
+	}
+	
+	worker.onmessage = function(event){
+		var rgb_sums = event.data;
+		
+		// Set the background color to the new color
+		var new_rgb = 'rgb(' + rgb_sums.join(',') + ')';
+		body.style.background = new_rgb;
+		
+		// Update the rgb label
+		current_rgb.innerHTML = new_rgb;
+	}
+	
+	function init(){
+		// Update the size of the canvas to match the video
+		my_canvas.width = my_video.width/2;
+		my_canvas.height = my_video.height/2;
+		
+		// Start updating the bg color
+		update_bg();
+	}
+	
+	my_video.addEventListener('play', init);
+
+</script>
+
+		</div>
+		<script type='text/javascript' src='../static/js/ga.js'></script>
+	</body>
+</html>
+
