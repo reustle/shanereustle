@@ -3,36 +3,138 @@ html {
 }
 body {
 	color: #333;
-	font-family: Verdana, Tahoma,  sans-serif;
-	padding-bottom: 100px;
+	font-family: Helvetica, Verdana, Tahoma,  sans-serif;
+	padding: 0px 0px 100px 0px;
+	border-top: 3px solid #d00;
+	margin: 0px;
 	text-align: center;
 }
 #wrapper {
 	background: #fff;
-	font-size: 0.85em;
-	line-height: 1.5em;
+	font-size: 16px;
+	line-height: 24px;
 	margin: 0px auto 10px auto;
 	min-height: 100%;
 	padding: 0px 20px 10px 20px;
 	text-align: left;
-	width: 700px;
+	width: 750px;
 }
 h1 {
-	font-size: 1.5em;
+	font-size: 18pt;
 	margin: 0px;
 	padding: 15px 0px 5px 0px;
 }
+h2.date {
+	font-size: 12pt;
+	margin: 0px;
+}
 pre {
 	background: #efefef;
-	font-size: 1.2em;
 	overflow: auto;
 	padding: 10px;
 }
 a {
 	color: #000;
 }
-.date {
-	font-size: 0.9em;
+
+.top_image {
+	margin-top: 15px;
+}
+
+#blog_index {
+	list-style-type: none;
+	font-size: 14px;
 	margin: 0px;
+	padding: 0px;
+	
+}
+
+#blog_index li {
+	border-bottom: 1px solid #555;
+	margin: 0px;
+}
+
+#blog_index li a {
+	text-decoration: none;
+	display: block;
+	padding: 8px 0px;
+}
+
+#blog_index a:hover {
+	color: #d00;
+}
+
+#blog_index .date {
+	float: right;
+}
+
+#blog_banner {
+	background: #222;
+	color: #ddd;
+	text-align: center;
+}
+
+#blog_banner a {
+	color: #fff;
+	text-decoration: none;
+}
+
+#blog_banner .red {
+	color: #d00;
+}
+
+#blog_banner .wrapper {
+	width: 750px;
+	margin: 0px auto;
+	padding: 10px 0px;
+	text-align: left;
+}
+
+#blog_banner .right {
+	float: right;
+}
+
+#blog_banner .icons {
+	display: inline-block;
+	border-left: 5px solid #222;
+	height: 16px;
+	width: 16px;
+}
+
+#blog_banner .twitter {
+	background: url('../img/social_icons.png') -68px 0px no-repeat;
+}
+
+#blog_banner .github {
+	background: url('../img/social_icons.png') -17px 0px no-repeat;
+}
+
+#blog_banner .rss {
+	background: url('../img/social_icons.png') -136px 0px no-repeat;
+}
+
+
+#blog_banner .google {
+	background: url('../img/social_icons.png') -34px 0px no-repeat;
+}
+
+#blog_banner .forrst {
+	background: url('../img/social_icons.png') -85px 0px no-repeat;
+}
+
+#blog_banner .email {
+	background: url('../img/social_icons.png') 0px 0px no-repeat;
+}
+
+#blog_banner .linkedin {
+	background: url('../img/social_icons.png') -51px 0px no-repeat;
+}
+
+#blog_banner .stackoverflow {
+	background: url('../img/social_icons.png') -119px 0px no-repeat;
+}
+
+#blog_banner .tumblr {
+	background: url('../img/social_icons.png') -102px 0px no-repeat;
 }
 
