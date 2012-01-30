@@ -31,6 +31,7 @@ h2.date {
 pre {
 	background: #efefef;
 	overflow: auto;
+	font-size: 14pt;
 	padding: 10px;
 }
 a {
