@@ -14,8 +14,8 @@
 <p>JavaScript gives us an event loop so we can set timeouts and listeners without blocking the entire program. The problem with this approach shows when you start writing CPU intensive code. The event loop can only execute one task at a time, so if one of those tasks takes 5 seconds, nothing else can run until that is finished. On top of the JavaScript engine being locked during this time, the browser will not render any UI changes. This results in the entire browser freezing. As we move to heavier client side applications, this limitation becomes more obvious.</p>
 <p>Web Workers are one of the new features in the HTML5 spec and allow us to essentially create multiple event loops. By running expensive operations in their own threads, the user experience stays responsive. Below is an example of an expensive operation implemented with and without a worker.</p>
 
-<input type='button' value='Find 1,500th Prime' onclick='find_prime(1500)'/><br/>
-<input type='button' value='Find 1,500th Prime with Web Worker' onclick='find_prime_worker(1500)'/><br/>
+<input type='button' value='Find 4,000th Prime' onclick='find_prime(4000)'/><br/>
+<input type='button' value='Find 4,000th Prime with Web Worker' onclick='find_prime_worker(4000)'/><br/>
 <div id='result'>&nbsp;</div>
 
 <p>A worker is initiated by passing a JavaScript file which includes a specific event listener. No global variables are available in the worker, which includes the document and window objects. The only way to pass data in is to fire a message event to the worker as a string. More recently, browsers have been starting to support sending an object which will be json stringified, but to be safe you can always do that yourself before sending the data.</p>
