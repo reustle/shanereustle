@@ -2,84 +2,92 @@
 <html lang='en'>
 	<head>
 		<meta charset='utf-8'/>
-		<title>Reading HTML5 Video Data | Shane Reustle</title>
+		<title>Free Up The Event Loop With Web Workers | Shane Reustle</title>
 		<link rel='stylesheet' href='../static/css/blog.css'/>
-		<link rel='canonical' href='http://shanereustle.com/blog/force-screen-resolutions-on-ubuntu.html'/>
-		<style>
-			#my_video {
-				margin-left: 30px;
-			}
-			#my_canvas {
-				display: none;
-			}
-		</style>
+		<link rel='canonical' href='http://shanereustle.com/blog/free-up-the-event-loop-with-web-workers.html'/>
 	</head>
 	<body>
 		<div id='wrapper'>
 
-<h1>Reading HTML5 Video Data</h1>
-<h2 class='date'>30 September 2011</h2>
-<p>One of the cooler features I've found in HTML5&#39;s new &#60;video&#62; tag is the ability to easily stream its content to a canvas. By passing the video element to the <strong>drawImage</strong> method of a canvas, along with some size parameters, you're able to create a duplicate output of the video. This opens up a whole new set of options for what you can do with your video data. We're going to use it to find the average color of the frame.</p>
-<p>Once you have your video piped into a canvas, you can use the <strong>getImageData</strong> method on the canvas to pull the current frame. This will return an ImageData object which includes a CanvasPixelArray list named data. The length of this list is <strong>video_width * video_height * 4</strong>, commonly known as RGBA format. For every pixel there is a red, green, blue and alpha value. By using every pixel on the canvas (or every 4 in our case, to increase speed), we are able to calculate the average color of the frame. In the example below, I set the average frame color as the background at 30fps. You can also see the average frame color listed below the video.</p>
+<h1>Free Up The Event Loop With Web Workers</h1>
+<h2 class='date'>31 January 2012</h2>
+<p>JavaScript gives us an event loop so we can set timeouts and listeners without blocking the entire program. The problem with this approach shows when you start writing CPU intensive code. The event loop can only execute one task at a time, so if one of those tasks takes 5 seconds, nothing else can run until that is finished. On top of the JavaScript engine being locked during this time, the browser will not render any UI changes. This results in the entire browser freezing. As we move to heavier client side applications, this limitation becomes more obvious.</p>
+<p>Web Workers are one of the new features in the HTML5 spec and allow us to essentially create multiple event loops. By running expensive operations in their own threads, the user experience stays responsive. Below is an example of an expensive operation implemented with and without a worker.</p>
 
-<video id='my_video' height='266' width='640' controls loop>
-	<source src='resources/cars2.webm' type='video/webm'/>
-</video>
-<canvas id='my_canvas'></canvas>
-<div id="current_rgb">&nbsp;</div>
+<input type='button' value='Find 1,500th Prime' onclick='find_prime(1500)'/><br/>
+<input type='button' value='Find 1,500th Prime with Web Worker' onclick='find_prime_worker(1500)'/><br/>
+<div id='result'>&nbsp;</div>
 
-<p>If you take a look at the source code of this page, it should be fairly clear as to how it works. To reiterate, I am playing a video using the new HTML5 &#60;video&#62; tag, which is hidden. I then stream that video data into a canvas, which I read 30 times per second. Every time I read the canvas, I figure out the average color and set that as the background color. In my next blog post, I will work on moving some of these expensive calculations out of the main event loop using web workers.</p>
+<p>A worker is initiated by passing a JavaScript file which includes a specific event listener. No global variables are available in the worker, which includes the document and window objects. The only way to pass data in is to fire a message event to the worker as a string. More recently, browsers have been starting to support sending an object which will be json stringified, but to be safe you can always do that yourself before sending the data.</p>
+<p>Take a look at the source of this page for a simple working example. You can <a href='https://developer.mozilla.org/En/Using_web_workers'>read more about web workers here</a>. Feel free to <a href='mailto:sreustle@gmail.com'>ask me</a> any questions you have.</p>
 
 <script>
 	
-	// Main elements
-	var body = document.getElementsByTagName('body')[0];
-	var current_rgb = document.getElementById('current_rgb');
-	var my_video = document.getElementById('my_video');
-	var my_canvas = document.getElementById('my_canvas');
-	var my_canvas_context = my_canvas.getContext('2d');
-	var worker = new Worker('resources/avg_frame_color.js');
+	var start_time;
 	
-	function update_bg(){
+	var find_prime = function(nth_prime){
+		// Find Nth prime
 		
-		// If the video isn't playing, don't loop
-		if(my_video.paused || my_video.ended){
-			return false;
+		document.getElementById('result').innerHTML = 'Running...';
+		
+		start_time = new Date();
+		
+		var is_prime = function(num){
+			// The purpose of this function is to be slow
+			
+			var counter = num - 1;
+			while(counter > 1){
+				if(num % counter == 0){
+					return false;
+				}
+				counter--;
+			}
+			return true;
+		};
+		
+		var current_num = 3;
+		var primes = [];
+		
+		while(primes.length != nth_prime){
+			if(is_prime(current_num)){
+				primes.push(current_num);
+			}
+			current_num++;
 		}
+			
+		var result = primes[primes.length - 1];
 		
-		// Draw the current frame of the video onto the hidden canvas
-		my_canvas_context.drawImage(my_video, 0, 0, my_video.width/2, my_video.height/2);
+		var duration = parseFloat((new Date()) - start_time) / 1000;
 		
-		// Pull the image data from the canvas
-		var frame_data = my_canvas_context.getImageData(0, 0, my_video.width/2, my_video.height/2).data;
+		document.getElementById('result').innerHTML = 'Took ' + duration + ' seconds';
 		
-		worker.postMessage(frame_data);
+	};
+	
+	// Initiate the worker. It will now wait for messages.
+	var worker = new Worker('resources/find_prime.js');
+	
+	var find_prime_worker = function(nth_prime){
+		// Find Nth prime using a web worker
 		
-		// Repeat every 1/10th of a second
-		setTimeout(update_bg, 100);
-	}
+		document.getElementById('result').innerHTML = 'Running...';
+		
+		start_time = new Date();
+		
+		// Send the worker a message.
+		worker.postMessage(nth_prime);
+		
+	};
 	
 	worker.onmessage = function(event){
-		var rgb_sums = event.data;
+		// Once the worker returns the result, update the UI
 		
-		// Set the background color to the new color
-		var new_rgb = 'rgb(' + rgb_sums.join(',') + ')';
-		body.style.background = new_rgb;
+		var result = event.data;
 		
-		// Update the rgb label
-		current_rgb.innerHTML = new_rgb;
-	}
-	
-	function init(){
-		// Update the size of the canvas to match the video
-		my_canvas.width = my_video.width/2;
-		my_canvas.height = my_video.height/2;
+		var duration = parseFloat((new Date()) - start_time) / 1000;
 		
-		// Start updating the bg color
-		update_bg();
-	}
-	
-	my_video.addEventListener('play', init);
+		document.getElementById('result').innerHTML = 'Took ' + duration + ' seconds';
+		
+	};
 
 </script>
 
