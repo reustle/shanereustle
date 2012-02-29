@@ -15,9 +15,9 @@
 <p>Web Workers are one of the new features in the HTML5 spec and allow us to essentially create multiple event loops. By running expensive operations in their own threads, the user experience stays responsive. Below is an example of an expensive operation implemented with and without a worker.</p>
 
 <select id='nth_prime'>
-	<option value='1000'>1,000th Prime</option>
 	<option value='2000'>2,000th Prime</option>
-	<option value='3000'>3,000th Prime</option>
+	<option value='4000'>4,000th Prime</option>
+	<option value='6000'>6,000th Prime</option>
 </select>
 <input type='button' value='Find Prime' onclick='find_prime()'/>
 <input type='button' value='Find Prime with Web Worker' onclick='find_prime_worker()'/><br/>
