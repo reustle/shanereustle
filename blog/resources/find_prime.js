@@ -4,7 +4,7 @@ self.onmessage = function(event){
 	var nth_prime = parseInt(event.data, 10);
 	
 	var is_prime = function(num){
-		// The purpose of this function is to be slow.
+		// This function is intentionally slow
 		
 		var counter = num - 1;
 		while(counter > 1){
