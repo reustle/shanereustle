@@ -2,7 +2,7 @@
 	
 	var banner_el = document.createElement('div');
 	var wrapper = document.getElementsByTagName('div')[0];
-	var banner = '<div id="blog_banner"><div class="wrapper"><a href="/">Shane <span class="red">Reustle</span></a><div class="right">';
+	var banner = '<div id="blog_banner"><div class="wrapper"><a href="/blog/">Shane <span class="red">Reustle</span></a><div class="right">';
 	banner += '<a class="icons tumblr" title="Blog Index" href="/blog/"></a>';
 	banner += '<a class="icons twitter" title="Twitter" href="http://twitter.com/reustle/"></a>';
 	banner += '<a class="icons github" title="GitHub" href="http://github.com/reustle/"></a>';
