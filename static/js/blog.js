@@ -24,7 +24,8 @@
 	
 	insert_banner();
 	
-	var url_ends_with = window.location.toString().split('.')[1]
+	var url_ends_with = window.location.toString().split('.');
+	url_ends_with = url_ends_with[url_ends_with.length - 1];
 	if(url_ends_with && url_ends_with == 'html'){
 		insert_return_link();
 	}
