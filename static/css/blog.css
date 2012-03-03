@@ -5,7 +5,7 @@ body {
 	color: #333;
 	font-family: Helvetica, Verdana, Tahoma,  sans-serif;
 	padding: 0px 0px 100px 0px;
-	border-top: 3px solid #d00;
+	border-top: 3px solid #e00;
 	margin: 0px;
 	text-align: center;
 }
@@ -62,16 +62,19 @@ a {
 }
 
 #blog_index a:hover {
-	color: #d00;
+	color: #e00;
 }
 
 #blog_index .date {
 	float: right;
 }
 
+/* Blog Banner */
+
 #blog_banner {
 	background: #222;
 	color: #ddd;
+	letter-spacing: 1px;
 	text-align: center;
 }
 
@@ -81,7 +84,8 @@ a {
 }
 
 #blog_banner .red {
-	color: #d00;
+	color: #e00;
+	margin-left: 1px;
 }
 
 #blog_banner .wrapper {
@@ -114,13 +118,8 @@ a {
 	background: url('../img/social_icons.png') -136px 0px no-repeat;
 }
 
-
 #blog_banner .google {
 	background: url('../img/social_icons.png') -34px 0px no-repeat;
-}
-
-#blog_banner .forrst {
-	background: url('../img/social_icons.png') -85px 0px no-repeat;
 }
 
 #blog_banner .email {
@@ -129,13 +128,5 @@ a {
 
 #blog_banner .linkedin {
 	background: url('../img/social_icons.png') -51px 0px no-repeat;
-}
-
-#blog_banner .stackoverflow {
-	background: url('../img/social_icons.png') -119px 0px no-repeat;
-}
-
-#blog_banner .tumblr {
-	background: url('../img/social_icons.png') -102px 0px no-repeat;
 }
 
