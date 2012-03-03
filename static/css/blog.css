@@ -24,9 +24,12 @@ h1 {
 	margin: 0px;
 	padding: 15px 0px 5px 0px;
 }
-h2.date {
+h2 {
 	font-size: 12pt;
 	margin: 0px;
+}
+h3 {
+	font-size: 14pt;
 }
 pre {
 	background: #efefef;
