@@ -15,7 +15,19 @@
 		wrapper.parentNode.insertBefore(banner_el, wrapper);
 	};
 	
+	var insert_return_link = function(){
+		var return_link = document.createElement('p');
+		return_link.innerHTML = '<a href="/blog/">&laquo; View all posts</a>';
+		
+		document.getElementById('wrapper').appendChild(return_link.firstChild);
+	};
+	
 	insert_banner();
+	
+	var url_ends_with = window.location.toString().split('.')[1]
+	if(url_ends_with && url_ends_with == 'html'){
+		insert_return_link();
+	}
 	
 })();
 
