@@ -54,6 +54,9 @@ a {
 	border-bottom: 1px solid #555;
 	margin: 0px;
 }
+#blog_index li:last-child {
+	border-bottom: 0px solid #fff;
+}
 
 #blog_index li a {
 	text-decoration: none;
