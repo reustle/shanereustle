@@ -17,7 +17,7 @@
 	
 	var insert_return_link = function(){
 		var return_link = document.createElement('p');
-		return_link.innerHTML = '&laquo; <a href="/blog/">View all posts</a>';
+		return_link.innerHTML = '<a href="/blog/">&laquo; View all posts</a>';
 		
 		document.getElementById('wrapper').appendChild(return_link.firstChild);
 	};
