@@ -1,0 +1,34 @@
+<?xml version='1.0' encoding='utf-8'?>
+<rss version='2.0'>
+	<channel>
+		<title>ShaneReustle.com Blog</title>
+		<description>Shane Reustle is a software engineer in New York City. This is his blog.</description>
+		<link>http://shanereustle.com/blog/</link>
+		<item>
+			<title>Free Up the Event Loop with Web Workers</title>
+			<link>http://shanereustle.com/blog/free-up-the-event-loop-with-web-workers.html</link>
+			<pubDate>Tues, 31 January 2012 12:00:00 EST</pubDate>
+		</item>
+		<item>
+			<title>Reading HTML5 Video Data</title>
+			<link>http://shanereustle.com/blog/reading-html5-video-data.html</link>
+			<pubDate>Fri, 30 September 2011 12:00:00 EST</pubDate>
+		</item>
+		<item>
+			<title>Controlling the ARDrone with Python</title>
+			<link>http://shanereustle.com/blog/controlling-the-ardrone-with-python.html</link>
+			<pubDate>Sun, 26 June 2011 12:00:00 EST</pubDate>
+		</item>
+		<item>
+			<title>Simple Site Scraping with NodeJS and JSDOM</title>
+			<link>http://shanereustle.com/blog/simple-site-scraping-with-nodejs-and-jsdom.html</link>
+			<pubDate>Fri, 15 April 2011 12:00:00 EST</pubDate>
+		</item>
+		<item>
+			<title>Force Screen Resolutions on Ubuntu 10.10</title>
+			<link>http://shanereustle.com/blog/force-screen-resolutions-on-ubuntu.html</link>
+			<pubDate>Thurs, 18 November 2010 12:00:00 EST</pubDate>
+		</item>
+	</channel>
+</rss>
+
