@@ -13,7 +13,36 @@
 <h1>Running MongoDB on Amazon Web Services</h1>
 <h2 class='date'>3 March 2012</h2>
 
-<p>I have spent most of my time over the past few months manging a large system of more than 15 MongoDB instances on AWS. I will go through some of the helpful things I have learned.</p>
+<p>I've spent the past few months managing and scaling multiple MongoDB clusters on AWS, and have learned some helpful lessons along the way. I will run through setting up a fresh instance with Mongo at a high level, and go into detail with the non-intuitive parts. I will assume you already know how to get around AWS and have set up machines before.</p>
+
+<p>When running Mongo on AWS, there are a few things you need to take into account. One of the bigger factors is how much data do you need to store, and how fast do you need it. According to <a href='#'>this blog post by foo bar</a>, you will get the most performance out of AWS drives by using raid-0 with 4 EBS drives. It is also wise to use EBS because if your data is on ephemeral storage and the machine restarts for whatever reason, your data is gone. You can snapshot EBS. Here is raid.sh and what it does.</p>
+
+<p>Another thing you're going to need to do is make sure your file limits are set high enough. Mongo likes to hold a lot of files open. Here are my standard /etc/sysctl.conf and /etc/security/sec.conf (?) files. You may need to logout / reboot (?) after changing these</p>
+
+<p>Now that we have some of the general machine changes out o the way, you can download the latest 64bit version of mongodb direcly from their site here. Once you extract that tar.gz file, make sure you alias that path in your ~/.bashrc file.</p>
+
+<p>When starting mongo, these are the flags I use.</p>
+<ul>
+	<li>--fork : Send itself to a backgrounded process</li>
+	<li>--logpath : Where to store the log file (different disk)</li>
+	<li>--dbpath : Where to store the actual db files, your raiddrive if you set one up</li>
+	<li>--nojournal : don't journal, because x</li>
+	<li>--rest : rest interface</li>
+	<li>whatever else you want (replica set stuff, ports, etc)</li>
+</ul>
+<p></p>
+
+X Alestic.com (not ubuntu 10.04) (64bit always)
+X Amount of data going through, will it fit in memory? Does it need to?
+-- going to need to use ebs drives for performance and durability
+-- file # limits
+-- Once machine is done rebooting and 4x drives are attached, here is raid.sh
+-- wget mongodb.tgz ; tar xvfz mongodb.tgz ; rm mongodb.tgz
+- Starting Mongo, flags I use, log on diff drive
+- Now that mongo is running, here is how to snapshot ec2-con~-snapshot --foo --bar
+- mongostat & mongotop
+- Munin
+- List of weirdness
 
 <h3>Hardware Setup</h3>
 <p>AWS, EC2, EBS</p>
