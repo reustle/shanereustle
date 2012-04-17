@@ -73,10 +73,7 @@ sudo PERL_MM_USE_DEFAULT=1 cpan -fi MongoDB MongoDB::Admin ;
 
 cd /usr/bin/ ;
 
-sudo wget https://raw.github.com/elubow/ec2-consistent-snapshot/master/ec2-consistent-snapshot ;
-
-sudo mv ec2-consistent-snapshot ec2-consistent-snapshot.bak ;
-sudo mv ec2-consistent-snapshot.1 ec2-consistent-snapshot ;
+sudo wget https://raw.github.com/elubow/ec2-consistent-snapshot/master/ec2-consistent-snapshot -O ec2-consistent-snapshot ;
 sudo chmod +x ec2-consistent-snapshot ;
 </pre>
 
