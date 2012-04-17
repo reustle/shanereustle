@@ -65,7 +65,9 @@ sudo chown ubuntu:ubuntu /raiddrive;
 <h1>ec2-consistent-snapshot</h1>
 <p><a href='http://eric.lubow.org/2011/databases/mongodb/ec2-consistent-snapshot-with-mongo/'>ec2-consistent-snapshot w/ mongo support</a> by Eric Lubow</p>
 <pre>
-sudo add-apt-repository ppa:alestic && sudo apt-get update && sudo apt-get install -y ec2-consistent-snapshot build-essential libio-socket-ssl-perl libdatetime-perl
+sudo add-apt-repository ppa:alestic
+sudo apt-get update
+sudo apt-get install -y ec2-consistent-snapshot build-essential libio-socket-ssl-perl libdatetime-perl
 
 sudo PERL_MM_USE_DEFAULT=1 cpan -fi MongoDB MongoDB::Admin
 
