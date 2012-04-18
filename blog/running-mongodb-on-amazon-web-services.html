@@ -11,13 +11,13 @@
 		<div id='wrapper'>
 
 <h1>Running MongoDB on Amazon Web Services</h1>
-<h2 class='date'>3 March 2012</h2>
+<h2 class='date'>17 April 2012</h2>
 
 <p>I've spent the past few months managing and scaling multiple MongoDB clusters on AWS, and have picked up a few tricks along the way. Below I've explained a few of the odd or helpful things I've learned from setting up the instance to maintaining it.</p>
 
-<p>Whenever I'm starting an instance from scratch, rather than one of my own AMIs, I will use an Ubuntu AMI from <a href='http://alestic.com/'>Eric Hammond</a>. They make it really easy to get an instance up and running quickly. One thing to note with picking which AMI to use is that Ubuntu 10.04 does not play well with EBS. I had all kinds of weird problems including Mongo locking up entirely for 5 minutes at a time due to 100% disk utilization. After getting everything over to 11.10, Mongo was fine. If you find yourself installing a lot of the same software over and over after setting up an instance, you may want to consider making your own AMI on top of one of these.</p>
+<p>Whenever I'm starting an instance from scratch, rather than one of my own AMIs, I will use an Ubuntu AMI from <a href='http://alestic.com/'>Eric Hammond</a>. They make it really easy to get an instance up and running quickly. One thing to note with picking which AMI to use is that Ubuntu 10.04 does not play well with EBS. I had all kinds of weird problems including Mongo locking up entirely for 5 minutes at a time due to 100% disk utilization. After getting everything over to 11.10, Mongo was fine.</p>
 
-<p>A good practice when setting up a fresh instance for Mongo is to raise the limit to the number of open files allowed. You can also do this after you have a machine already running, but the change requires a restart. To raise the limit, you'll need to modify /etc/sysctl.conf and /etc/security/limits.conf. The changes that need to be made are listed below.</p>
+<p>A good practice when setting up a fresh instance for Mongo is to raise the limit to the number of open files allowed. You can also do this after a machine has been running, but the change requires a restart. To raise the limit, you'll need to modify some config files. The changes that need to be made are listed below.</p>
 
 <strong>Overwrite /etc/sysctl.conf with</strong>
 <pre>
@@ -32,7 +32,9 @@ ubuntu     soft     nofile     350000
 ubuntu     hard     nofile     350000
 </pre>
 
-<p>If you're looking to get reasonably good performance out of EBS, you're going to want to set up a RAID drive with 4x 1TB drives. In a blog post on <strike><b><a href='http://victortrac.com/EC2_Ephemeral_Disks_vs_EBS_Volumes'>aws drive performance</a>, Victor Trac</b></strike> did a few tests on how to get the most performance out of EBS, and he found that this was the best case. If you're going to want to set this up, you can use the shell script I have below. I don't know the original author, but I modified it to work with Ubuntu 11.04 and above, since they went from using sdX as their drive names to xvdX. <strike><b>what is setra and what should it be, same with chunk</b></strike></p>
+<p>Once those changes are made, restart the system and you're good. You can run 'ulimit -a' to make sure the limit has updated properly.</p>
+
+<p>If you're looking to get reasonably good performance out of EBS, you're going to want to set up a RAID drive with 4x 1TB drives. In a blog post on <a href='http://victortrac.com/EC2_Ephemeral_Disks_vs_EBS_Volumes'>AWS drive performance</a>, Victor Trac did a few tests on how to get the most performance out of EBS, and he found that this was the best configuration. If you're going to use this setup, you can use the shell script I have below. It was written using information from Victors post, but I have modified it for Ubuntu 11.04 and above, since they went from using sdX to xvdX as their drive names. Victor goes into some details of the script below in his post.
 
 <strong>raid.sh</strong>
 <pre>
@@ -58,7 +60,7 @@ df -h /raiddrive;
 sudo chown ubuntu:ubuntu /raiddrive;
 </pre>
 
-<p>When you get around to starting Mongo, you're going to need to make some decisions on things like where the log file is located (--logpath). I have found that putting the log file on a separate disk from the actual DB is a good idea. The log file can sometimes get unruly and can be stealing valuable resources from your primary DB disk.</p> 
+<p>When you get around to starting Mongo, you're going to need to make some decisions on things like where the log file is located (--logpath). I have found that putting the log file on a separate disk from the actual DB is a good idea, since it can sometimes get unruly and steal valuable resources from your primary DB disk. I have yet to come up with an elegant solution to auto rotating these logs, but will possibly end up using the logrotate unix tool. If you have any other methods, I'd be interested in hearing them.</p> 
 
 <p>Backing up mongo</p>
 
@@ -78,62 +80,12 @@ chmod +x ec2-consistent-snapshot
 
 http://alestic.com/2009/09/ec2-consistent-snapshot
 http://www.capsunlock.net/2011/06/mongodb-using-ec2-consistent-snapshot.html
-https://github.com/mongodb/mongo-perl-driver
 <pre>
 ./ec2-consistent-snapshot-mongo --debug --mongo --aws-access-key-id=ABCDEFGHI --aws-secret-access-key=ABC1DEFG1HIJKL --xfs-filesystem=/raiddrive/ --region us-east-1 --description "MongoDB RAID Manual Snapshot $(date)" vol-VOLID vol-VOLID vol-VOLID vol-VOLID
 </pre>
 
 <h1>secondary replication munin chart</h1>
-<p>To keep track of all my servers, I use <a href='#'>Munin Monitoring</a> software. It allows me to easily keep track of memory usage and disk latency (important to watch) on my primary mongno servers. I use the official <a href='#'>Mongo Munin Plugins</a> for standard things like ops/sec, but found myself really needing a graph showing the delay between a primary or secondary. That's why I wrote this <a href='#'>mongo replication delay plugin</a>, which works well with the other plugins.</p>
-
-<hr/><hr/><hr/><hr/>
-
-
-
-
-
-
-
-
-
-
-<p>When running Mongo on AWS, there are a few things you need to take into account. One of the bigger factors is how much data do you need to store, and how fast do you need it. According to <a href='#'>this blog post by foo bar</a>, you will get the most performance out of AWS drives by using raid-0 with 4 EBS drives. It is also wise to use EBS because if your data is on ephemeral storage and the machine restarts for whatever reason, your data is gone. You can snapshot EBS. Here is raid.sh and what it does.</p>
-
-<p>Another thing you're going to need to do is make sure your file limits are set high enough. Mongo likes to hold a lot of files open. Here are my standard /etc/sysctl.conf and /etc/security/sec.conf (?) files. You may need to logout / reboot (?) after changing these</p>
-
-<p>Now that we have some of the general machine changes out o the way, you can download the latest 64bit version of mongodb direcly from their site here. Once you extract that tar.gz file, make sure you alias that path in your ~/.bashrc file.</p>
-
-<p>When starting mongo, these are the flags I use.</p>
-<ul>
-	<li>--fork : Send itself to a backgrounded process</li>
-	<li>--logpath : Where to store the log file (different disk)</li>
-	<li>--dbpath : Where to store the actual db files, your raiddrive if you set one up</li>
-	<li>--nojournal : don't journal, because x</li>
-	<li>--rest : rest interface</li>
-	<li>whatever else you want (replica set stuff, ports, etc)</li>
-</ul>
-<p></p>
-
-X Alestic.com (not ubuntu 10.04) (64bit always)
-X Amount of data going through, will it fit in memory? Does it need to?
--- going to need to use ebs drives for performance and durability
--- file # limits
--- Once machine is done rebooting and 4x drives are attached, here is raid.sh
--- wget mongodb.tgz ; tar xvfz mongodb.tgz ; rm mongodb.tgz
-- Starting Mongo, flags I use, log on diff drive
-- Now that mongo is running, here is how to snapshot ec2-con~-snapshot --foo --bar
-- mongostat & mongotop
-- Munin
-- List of weirdness
-
-<h3>Hardware Setup</h3>
-<p>AWS, EC2, EBS</p>
-
-<h3>Software Setup</h3>
-<p>Alestic.com, Ubuntu 10.04 bad, file limits, mongodb, log on diff disk</p>
-
-<h3>Administration</h3>
-<p>Munin, mongostat, mongotop, ec2-consitent-snapshot</p>
+<p>To keep track of all my servers, I use <a href='http://munin-monitoring.org/'>Munin Monitoring</a> software. It allows me to easily keep track of memory usage and disk latency (important to watch) on my primary mongno servers. I use the official <a href='http://www.mongodb.org/display/DOCS/Munin+configuration+examples'>Mongo Munin Plugins</a> for standard things like ops/sec, but found myself really needing a graph showing the delay between a primary or secondary. That's why I wrote this <a href='https://github.com/reustle/munin-mongo-replication'>mongo replication delay plugin</a>, which works well with the other plugins.</p>
 
 		</div>
 		<script type='text/javascript' src='../static/js/blog.js'></script>
