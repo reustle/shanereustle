@@ -1,8 +1,8 @@
 <!doctype html>
 <html lang='en'>
 	<head>
-		<meta charset='utf-8'/>
 		<title>Running MongoDB on Amazon Web Services | Shane Reustle</title>
+		<meta charset='utf-8'/>
 		<meta name='keywords' content='mongodb, aws, ec2, ebs, ubuntu'/>
 		<link rel='stylesheet' href='../static/css/blog.css'/>
 		<link rel='canonical' href='http://shanereustle.com/blog/running-mongodb-on-amazon-web-services.html'/>
@@ -11,61 +11,36 @@
 		<div id='wrapper'>
 
 <h1>Running MongoDB on Amazon Web Services</h1>
-<h2 class='date'>17 April 2012</h2>
+<h2 class='date'>15 April 2012</h2>
 
 <p>I've spent the past few months managing and scaling multiple MongoDB clusters on AWS, and have picked up a few tricks along the way. Below I've explained a few of the odd or helpful things I've learned from setting up the instance to maintaining it.</p>
 
-<p>Whenever I'm starting an instance from scratch, rather than one of my own AMIs, I will use an Ubuntu AMI from <a href='http://alestic.com/'>Eric Hammond</a>. They make it really easy to get an instance up and running quickly. One thing to note with picking which AMI to use is that Ubuntu 10.04 does not play well with EBS. I had all kinds of weird problems including Mongo locking up entirely for 5 minutes at a time due to 100% disk utilization. After getting everything over to 11.10, Mongo was fine.</p>
+<strong>Choosing an AMI</strong><br/>
+<p>Whenever I'm starting an instance from scratch, rather than one of my own AMIs, I will use an Ubuntu AMI from <a href='http://alestic.com/'>Eric Hammond</a>. They make it really easy to get an instance up and running quickly. One thing to note with picking which AMI to use is that Ubuntu 10.04 does not play well with EBS. I had some weird problems including Mongo locking up entirely for 5 minutes at a time due to 100% disk utilization. After getting everything over to 11.10, Mongo was fine.</p>
 
+<strong>Updating the file limit</strong><br/>
 <p>A good practice when setting up a fresh instance for Mongo is to raise the limit to the number of open files allowed. You can also do this after a machine has been running, but the change requires a restart. To raise the limit, you'll need to modify some config files. The changes that need to be made are listed below.</p>
 
-<strong>Overwrite /etc/sysctl.conf with</strong>
+<em>Overwrite /etc/sysctl.conf with</em>
 <pre>
 fs.file-max = 360000
 net.ipv4.ip_local_port_range = 1024 65000
 net.ipv4.tcp_max_syn_backlog = 2048
 </pre>
 
-<strong>Overwrite /etc/security/limits.conf with</strong>
+<em>Overwrite /etc/security/limits.conf with</em>
 <pre>
 ubuntu     soft     nofile     350000
 ubuntu     hard     nofile     350000
 </pre>
 
-<p>Once those changes are made, restart the system and you're good. You can run 'ulimit -a' to make sure the limit has updated properly.</p>
+<p>Once those changes are made, restart the system and you're good to go. You can run <em>ulimit -a</em> to make sure the limit has updated properly.</p>
 
-<p>If you're looking to get reasonably good performance out of EBS, you're going to want to set up a RAID drive with 4x 1TB drives. In a blog post on <a href='http://victortrac.com/EC2_Ephemeral_Disks_vs_EBS_Volumes'>AWS drive performance</a>, Victor Trac did a few tests on how to get the most performance out of EBS, and he found that this was the best configuration. If you're going to use this setup, you can use the shell script I have below. It was written using information from Victors post, but I have modified it for Ubuntu 11.04 and above, since they went from using sdX to xvdX as their drive names. Victor goes into some details of the script below in his post.
+<strong>Log file location</strong><br/>
+<p>When you get around to starting Mongo, you're going to need to make some decisions on things such as where the log file is located (--logpath). I have found that putting the log file on a separate disk from the actual DB is a good idea, since it can sometimes get unruly and steal valuable resources from your primary DB disk. I have yet to come up with an elegant solution to auto rotating these logs, but will possibly end up using the logrotate unix tool. If you have any other methods, I'd be interested in hearing them.</p> 
 
-<strong>raid.sh</strong>
-<pre>
-# mdadm == Raiding software
-# xfsprogs == XFS filesystem creator/manager
-
-sudo apt-get install -y mdadm xfsprogs;
-
-sudo mdadm --create /dev/md0 --level 0 --chunk=256 --metadata=1.1 --raid-devices=4 /dev/xvdf /dev/xvdg /dev/xvdh /dev/xvdi;
-echo DEVICE /dev/xvdf /dev/xvdg /dev/xvdh /dev/xvdi  | sudo tee /etc/mdadm/mdadm.conf;
-sudo mdadm --detail --scan | sudo tee -a /etc/mdadm/mdadm.conf;
-
-sudo mkfs.xfs /dev/md0;
-echo "/dev/md0 /raiddrive xfs noatime 0 0" | sudo tee -a /etc/fstab;
-
-sudo mkdir /raiddrive;
-sudo mount /raiddrive;
-
-sudo blockdev --setra 65536 /dev/md0;
-
-df -h /raiddrive;
-
-sudo chown ubuntu:ubuntu /raiddrive;
-</pre>
-
-<p>When you get around to starting Mongo, you're going to need to make some decisions on things like where the log file is located (--logpath). I have found that putting the log file on a separate disk from the actual DB is a good idea, since it can sometimes get unruly and steal valuable resources from your primary DB disk. I have yet to come up with an elegant solution to auto rotating these logs, but will possibly end up using the logrotate unix tool. If you have any other methods, I'd be interested in hearing them.</p> 
-
-<p>Backing up mongo</p>
-
-<h1>ec2-consistent-snapshot</h1>
-<p><a href='http://eric.lubow.org/2011/databases/mongodb/ec2-consistent-snapshot-with-mongo/'>ec2-consistent-snapshot w/ mongo support</a> by Eric Lubow</p>
+<strong>Backing up Mongo</strong><br/>
+<p>Backing up your running mongo instance can get tricky. There are ways to lock the database while copying the files, to ensure no data coruption, but that downtime can be painful. The best way I've found to go about this is to use a script created by Eric Hammond called <a href='#'>ec2-consistent-snapshot</a> which has been modified by Eric Lubow to include <a href='http://eric.lubow.org/2011/databases/mongodb/ec2-consistent-snapshot-with-mongo/'>mongo support</a>. This script will freeze Mongo, freeze XFS if you're using it, and take a point in time snapshot of your data drive. This causes your database to be locked for a total of about 5 seconds. To install it, I've included the instructions below, along with the command I use to run it.</p>
 <pre>
 sudo add-apt-repository ppa:alestic ;
 sudo apt-get update ;
@@ -74,7 +49,6 @@ sudo apt-get install -y ec2-consistent-snapshot build-essential libio-socket-ssl
 sudo PERL_MM_USE_DEFAULT=1 cpan -fi MongoDB MongoDB::Admin ;
 
 cd /usr/bin/ ;
-
 sudo wget https://raw.github.com/elubow/ec2-consistent-snapshot/master/ec2-consistent-snapshot -O ec2-consistent-snapshot ;
 sudo chmod +x ec2-consistent-snapshot ;
 </pre>
@@ -82,12 +56,13 @@ sudo chmod +x ec2-consistent-snapshot ;
 http://alestic.com/2009/09/ec2-consistent-snapshot
 http://www.capsunlock.net/2011/06/mongodb-using-ec2-consistent-snapshot.html
 <pre>
-./ec2-consistent-snapshot-mongo --debug --mongo --aws-access-key-id=ABCDEFGHI --aws-secret-access-key=ABC1DEFG1HIJKL --xfs-filesystem=/raiddrive/ --region us-east-1 --description "MongoDB RAID Manual Snapshot $(date)" vol-VOLID vol-VOLID vol-VOLID vol-VOLID
+./ec2-consistent-snapshot-mongo --debug --mongo --aws-access-key-id=ABCDEFGHI --aws-secret-access-key=ABC1DEFG1HIJKL --xfs-filesystem=/ebs_disk/ --region us-east-1 --description "MongoDB Manual Snapshot" vol-VOLID
 </pre>
 
-<h1>secondary replication munin chart</h1>
-<p>To keep track of all my servers, I use <a href='http://munin-monitoring.org/'>Munin Monitoring</a> software. It allows me to easily keep track of memory usage and disk latency (important to watch) on my primary mongno servers. I use the official <a href='http://www.mongodb.org/display/DOCS/Munin+configuration+examples'>Mongo Munin Plugins</a> for standard things like ops/sec, but found myself really needing a graph showing the delay between a primary or secondary. That's why I wrote this <a href='https://github.com/reustle/munin-mongo-replication'>mongo replication delay plugin</a>, which works well with the other plugins.</p>
+<strong>Munin graphs</strong><br/>
+<p>To keep track of all my servers, I use <a href='http://munin-monitoring.org/'>Munin Monitoring</a> software. It allows me to easily keep track of memory usage and disk latency (important to watch) on my primary mongno servers. I use the official <a href='https://github.com/erh/mongo-munin'>Mongo Munin Plugins</a> for standard things like ops/sec, but found myself constantly needing a graph showing the delay between a primary or secondary. That's why I wrote this <a href='https://github.com/reustle/munin-mongo-replication'>mongo replication delay plugin</a>, which works well with the other plugins.</p>
 
+<p>Hopefully you've picked up a thing or two from this post that you can use. Feel free to contact me if you have any other questions, enjoy!</p>
 		</div>
 		<script type='text/javascript' src='../static/js/blog.js'></script>
 		<script type='text/javascript' src='../static/js/ga.js'></script>
