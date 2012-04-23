@@ -5,6 +5,11 @@
 		<description>Shane Reustle is a software engineer in New York City. This is his blog.</description>
 		<link>http://shanereustle.com/blog/</link>
 		<item>
+			<title>Runnning MongoDB on Amazon Web Services</title>
+			<link>http://shanereustle.com/blog/running-mongodb-on-amazon-web-services.html</link>
+			<pubDate>15 April 2012</pubDate>
+		</item>
+		<item>
 			<title>Free Up the Event Loop with Web Workers</title>
 			<link>http://shanereustle.com/blog/free-up-the-event-loop-with-web-workers.html</link>
 			<pubDate>31 January 2012</pubDate>
