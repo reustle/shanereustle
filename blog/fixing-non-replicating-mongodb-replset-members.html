@@ -11,7 +11,7 @@
 		<div id='wrapper'>
 
 <h1>Fixing Non-Replicating MongoDB ReplSet Members</h1>
-<h2 class='date'>22 April 2012</h2>
+<h2 class='date'>21 April 2012</h2>
 
 <p>This week while trying to get a new replica set member up and running, I ran into some issues. After the new member copied the data over from the primary and began to replicate, the lock percentage would shoot up to 100%, along with the CPU usage. At this point, replication would lock up, doing somewhere around 10 operations per second (nowhere near the primary). After a few hours, the secondary would be at 100,000 seconds delayed and it was well past the point of no return. I repeated the process and the same thing happened, so I started digging and filed a mailing list post.</p>
 
