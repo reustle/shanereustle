@@ -21,11 +21,24 @@
 		
 		document.getElementById('wrapper').appendChild(return_link.firstChild);
 	};
+
+	var call_google_analytics = function(){
+		var new_script = document.createElement('script');
+		var first_script = document.getElementsByTagName('script')[0];
+		new_script.async = true;
+		new_script.src = '../static/js/ga.js';
+		first_script.parentNode.insertBefore(new_script, first_script);
+	};
 	
+	// Insert the page header
 	insert_banner();
 	
-	var url_ends_with = window.location.toString().split('.');
-	url_ends_with = url_ends_with[url_ends_with.length - 1];
+	// Call GA
+	call_google_analytics();
+	
+	// Add a return link if we're on a post
+	var url_pieces = window.location.toString().split('.');
+	var url_ends_with = url_pieces[url_pieces.length - 1];
 	if(url_ends_with && url_ends_with == 'html'){
 		insert_return_link();
 	}
