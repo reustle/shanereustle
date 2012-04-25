@@ -5,18 +5,15 @@
 		<description>Shane Reustle is a software engineer in New York City. This is his blog.</description>
 		<link>http://shanereustle.com/blog/</link>
 		<item>
+			<title>Runnning MongoDB on Amazon Web Services</title>
+			<link>http://shanereustle.com/blog/running-mongodb-on-amazon-web-services.html</link>
+			<pubDate>25 April 2012</pubDate>
+		</item>
+		<item>
 			<title>Fixing Non-Replicating MongoDB ReplSet Members</title>
 			<link>http://shanereustle.com/blog/fixing-non-replicating-mongodb-replset-members.html</link>
 			<pubDate>21 April 2012</pubDate>
 		</item>
-		
-		<!-- 
-		<item>
-			<title>Runnning MongoDB on Amazon Web Services</title>
-			<link>http://shanereustle.com/blog/running-mongodb-on-amazon-web-services.html</link>
-			<pubDate>15 April 2012</pubDate>
-		</item>
-		-->
 		<item>
 			<title>Free Up the Event Loop with Web Workers</title>
 			<link>http://shanereustle.com/blog/free-up-the-event-loop-with-web-workers.html</link>
