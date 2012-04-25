@@ -10,7 +10,7 @@
 		<div id='wrapper'>
 
 <h1>Free Up the Event Loop with Web Workers</h1>
-<h2 class='date'>31 January 2012</h2>
+<h3>31 January 2012</h3>
 <p>JavaScript gives us an event loop so we can set timeouts and listeners without blocking all script execution. The problem with this approach shows when you start writing CPU intensive code. The event loop can only execute one task at a time, so if one of those operations takes 5 seconds, nothing else can run until it has finished. On top of the JavaScript engine being locked during this time, the browser will not render any UI changes. This results in the entire browser freezing. As we move to heavier client side applications, this limitation becomes more obvious.</p>
 <p>Web Workers are one of the new features in the HTML5 spec and allow us to essentially create multiple event loops. By running expensive operations in their own threads, the user experience stays responsive. Below is an example of an expensive operation implemented with and without a worker.</p>
 

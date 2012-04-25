@@ -10,7 +10,7 @@
 		<div id='wrapper'>
 
 <h1>Simple Site Scraping with NodeJS and JSDOM</h1>
-<h2 class='date'>15 April 2011</h2>
+<h3>15 April 2011</h3>
 <p>I've been playing with Node on and off over the past couple of weeks and it's really starting to grow on me. I initially looked into it because I'm intrigued by the thought of using one language for both client and server side coding. Turns out, as people have pointed out, it's fast too. Really fast. I spent some time messing around with the hello world examples, built some simple APIs, and even gave a talk at <a href='http://barcampboston.org/'>BarCamp Boston</a> about the basics of Node, but I want to do something that takes advantage of the JS nature of Node. Let's start off with a simple site scraping example where we pull the current temperature. As the examples get more complex, we'll be able to leverage libraries like jQuery to do more complex scraping in an already familiar syntax.</p>
 <p>For this first example, you're going to need the Node packages Request and <a href='https://github.com/tmpvar/jsdom'>JSDOM</a>. You can get both of these using <a href='http://npmjs.org/'>npm</a> (npm install request jsdom). This is a pretty short example (9 lines), so I'll skip right to the code.</p>
 <pre>var request = require('request');
