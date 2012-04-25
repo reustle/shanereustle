@@ -13,13 +13,13 @@
 <h1>Running MongoDB on Amazon Web Services</h1>
 <h2 class='date'>15 April 2012</h2>
 
-<p>I've spent the past few months managing and scaling multiple MongoDB clusters on AWS, and have picked up a few tricks along the way. Below I've explained a few of the odd or helpful things I've learned from setting up the instance to maintaining it.</p>
+<p>I've spent the past few months managing and scaling multiple MongoDB clusters on AWS, and have picked up a few tricks along the way. There are a few things I have picked up along the way that may help you as you are setting up your first Mongo instance, or trying to keep your existing instances running smoothly.</p>
 
-<strong>Choosing an AMI</strong><br/>
-<p>Whenever I'm starting an instance from scratch, rather than one of my own AMIs, I will use an Ubuntu AMI from <a href='http://alestic.com/'>Eric Hammond</a>. They make it really easy to get an instance up and running quickly. One thing to note with picking which AMI to use is that Ubuntu 10.04 does not play well with EBS. I had some weird problems including Mongo locking up entirely for 5 minutes at a time due to 100% disk utilization. After getting everything over to 11.10, Mongo was fine.</p>
+<h3>Choosing an AMI</h3>
+<p>Whenever I'm starting an instance from scratch, rather than using one of my own AMIs, I will use an Ubuntu AMI from <a href='http://alestic.com/'>Eric Hammond</a>. They make it very easy to get an instance up and running immediately. One thing to note with picking which AMI to use is that Ubuntu 10.04 does not play well with EBS. I had some weird problems like Mongo locking up entirely for 5 minutes at a time due to 100% disk utilization. After getting everything over to 11.10, disk utilization stayed down.</p>
 
-<strong>Updating the file limit</strong><br/>
-<p>A good practice when setting up a fresh instance for Mongo is to raise the limit to the number of open files allowed. You can also do this after a machine has been running, but the change requires a restart. To raise the limit, you'll need to modify some config files. The changes that need to be made are listed below.</p>
+<h3>Updating the file limit</h3>
+<p>A good practice when setting up a fresh instance for Mongo is to raise the limit of open files allowed by the system. You can also do this after a machine has been running, but the change still requires a restart. To raise the limit, you'll need to modify the config files listed below.</p>
 
 <em>Overwrite /etc/sysctl.conf with</em>
 <pre>
@@ -34,13 +34,14 @@ ubuntu     soft     nofile     350000
 ubuntu     hard     nofile     350000
 </pre>
 
-<p>Once those changes are made, restart the system and you're good to go. You can run <em>ulimit -a</em> to make sure the limit has updated properly.</p>
+<p>Once those changes are made, restart the system and you're good to go. You can run <em>ulimit -a</em> to make sure the limit has been updated properly.</p>
 
-<strong>Log file location</strong><br/>
-<p>When you get around to starting Mongo, you're going to need to make some decisions on things such as where the log file is located (--logpath). I have found that putting the log file on a separate disk from the actual DB is a good idea, since it can sometimes get unruly and steal valuable resources from your primary DB disk. I have yet to come up with an elegant solution to auto rotating these logs, but will possibly end up using the logrotate unix tool. If you have any other methods, I'd be interested in hearing them.</p> 
+<h3>Log file location</h3>
+<p>When you get around to starting Mongo, you're going to need to make some decisions such as where the log file is located (--logpath). I found that putting the log file on a separate disk from the DB data itself is a good idea. Since it will get unruly over time, valuable resources will be taken from your primary DB disk, slowing things down. I have yet to come up with an elegant solution to auto rotating these logs, but will probably end up using the logrotate tool in linux. If you have any other solutions, I'd be interested in hearing them.</p> 
 
-<strong>Backing up Mongo</strong><br/>
-<p>Backing up your running mongo instance can get tricky. There are ways to lock the database while copying the files, to ensure no data coruption, but that downtime can be painful. The best way I've found to go about this is to use a script created by Eric Hammond called <a href='#'>ec2-consistent-snapshot</a> which has been modified by Eric Lubow to include <a href='http://eric.lubow.org/2011/databases/mongodb/ec2-consistent-snapshot-with-mongo/'>mongo support</a>. This script will freeze Mongo, freeze XFS if you're using it, and take a point in time snapshot of your data drive. This causes your database to be locked for a total of about 5 seconds. To install it, I've included the instructions below, along with the command I use to run it.</p>
+<h3>Backing up your data</h3>
+<p>Backing up a running Mongo instance can be tricky. There are ways to lock the database while copying the files, to ensure no data corruption, but that downtime can be painful. The best way I've found to go about this is to use a script created by Eric Hammond called <a href='http://alestic.com/2009/09/ec2-consistent-snapshot'>ec2-consistent-snapshot</a> which has been modified by Eric Lubow to <a href='http://eric.lubow.org/2011/databases/mongodb/ec2-consistent-snapshot-with-mongo/'>include mongo support</a>. This script will freeze Mongo, freeze XFS if you're using it, and take a point in time snapshot of your data drive. This causes your database to be locked for a total of about 5 seconds, which is not bad at all compared to other methods. To install the script, there are a few packages you'll need to install. I've listed the sequence commands below that worked best for me.</p>
+
 <pre>
 sudo add-apt-repository ppa:alestic ;
 sudo apt-get update ;
@@ -53,16 +54,16 @@ sudo wget https://raw.github.com/elubow/ec2-consistent-snapshot/master/ec2-consi
 sudo chmod +x ec2-consistent-snapshot ;
 </pre>
 
-http://alestic.com/2009/09/ec2-consistent-snapshot
-http://www.capsunlock.net/2011/06/mongodb-using-ec2-consistent-snapshot.html
+<p>Once installed, you can start snapshotting your drive(s). In the command below, you're going to need to replace the AWS access key and secret key with your own. You'll also need to set the filesystem path if you are using XFS (otherwise remove it), and the volume ID(s) at the end.</p>
+
 <pre>
-./ec2-consistent-snapshot-mongo --debug --mongo --aws-access-key-id=ABCDEFGHI --aws-secret-access-key=ABC1DEFG1HIJKL --xfs-filesystem=/ebs_disk/ --region us-east-1 --description "MongoDB Manual Snapshot" vol-VOLID
+ec2-consistent-snapshot --debug --mongo --aws-access-key-id=ABCDEFGHI --aws-secret-access-key=ABC1DEFG1HIJKL --xfs-filesystem=/ebs_disk/ --region us-east-1 --description "MongoDB Manual Snapshot" vol-VOLID
 </pre>
 
-<strong>Munin graphs</strong><br/>
-<p>To keep track of all my servers, I use <a href='http://munin-monitoring.org/'>Munin Monitoring</a> software. It allows me to easily keep track of memory usage and disk latency (important to watch) on my primary mongo servers. I use the official <a href='https://github.com/erh/mongo-munin'>Mongo Munin Plugins</a> for standard things like ops/sec, but found myself constantly needing a graph showing the delay between a primary or secondary. That's why I wrote this <a href='https://github.com/reustle/munin-mongo-replication'>mongo replication delay plugin</a>, which works well with the other plugins.</p>
+<h3>Munin graphs</h3>
+<p>To monitor my servers, I use <a href='http://munin-monitoring.org/'>Munin Monitoring</a> software. It helps me keep an eye on memory usage and disk latency (important to watch) on my Mongo servers, among many other things. I use the official <a href='https://github.com/erh/mongo-munin'>MongoDB Munin plugins</a> for standard things like ops/sec and lock percentage, but found myself constantly needing a graph showing the replication delay between replica set members. I eventually wrote this <a href='https://github.com/reustle/munin-mongo-replication'>Mongo replication delay plugin</a>, which adds itself to the same group as the other mongo plugins on the overview page.</p>
 
-<p>Hopefully you've picked up a thing or two from this post that you can use. If you are having second thoughts about managing your own Mongo instances, you should definitely check out <a href='http://mongohq.com'>MongoHQ</a>. Feel free to contact me if you have any other questions, enjoy!</p>
+<p>Hopefully you've picked up a thing or two from this post that you can use. If you are having second thoughts about managing your own Mongo instances, you should definitely check out <a href='http://mongohq.com'>MongoHQ</a> (they offer free hosting!). Feel free to contact me if you have any other questions. Enjoy!</p>
 		</div>
 		<script type='text/javascript' src='../static/js/blog.js'></script>
 		<script type='text/javascript' src='../static/js/ga.js'></script>
