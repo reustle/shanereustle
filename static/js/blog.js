@@ -1,3 +1,5 @@
+var _vrq = _vrq || [];
+
 (function(){
 	
 	var insert_banner = function(){
@@ -44,7 +46,6 @@
 	}
 	
 	// Insert Visual Revenue script :)
-	var _vrq = _vrq || [];
 	_vrq.push(['id', 141]);
 	_vrq.push(['automate', true]);
 	_vrq.push(['track', function(){}]);
