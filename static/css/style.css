@@ -78,9 +78,9 @@ a {
 	float: right;
 }
 
-/* Blog Banner */
+/* Banner */
 
-#blog_banner {
+#banner {
 	letter-spacing: 1px;
 	text-align: center;
 	background-color: #2c2c2c;
@@ -94,52 +94,52 @@ a {
 	filter:progid: DXImageTransform.Microsoft.gradient(startColorstr='#333333', endColorstr='#222222', GradientType=0);
 }
 
-#blog_banner a {
+#banner a {
 	color: #fff;
 	font-weight: bold;
 	text-decoration: none;
 }
 
-#blog_banner .red {
+#banner .red {
 	color: #e00;
 	margin-left: 1px;
 }
 
-#blog_banner .wrapper {
+#banner .wrapper {
 	width: 750px;
 	margin: 0px auto;
 	padding: 10px 0px;
 	text-align: left;
 }
 
-#blog_banner .right {
+#banner .right {
 	float: right;
 }
 
-#blog_banner .icons {
+#banner .icons {
 	display: inline-block;
 	margin-left: 5px;
 	height: 16px;
 	width: 16px;
 }
 
-#blog_banner .twitter {
+#banner .twitter {
 	background: url('../img/social_icons.png') -68px 0px no-repeat;
 }
 
-#blog_banner .github {
+#banner .github {
 	background: url('../img/social_icons.png') -17px 0px no-repeat;
 }
 
-#blog_banner .linkedin {
+#banner .linkedin {
 	background: url('../img/social_icons.png') -51px 0px no-repeat;
 }
 
-#blog_banner .google {
+#banner .google {
 	background: url('../img/social_icons.png') -34px 0px no-repeat;
 }
 
-#blog_banner .email {
+#banner .email {
 	background: url('../img/social_icons.png') 0px 0px no-repeat;
 }
 
