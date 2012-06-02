@@ -11,7 +11,6 @@ var _vrq = _vrq || [];
 		banner += '<a class="icons linkedin" title="LinkedIn" href="http://linkedin.com/in/reustle/"></a>';
 		banner += '<a class="icons google" title="Google" href="http://profiles.google.com/sreustle/"></a>';
 		banner += '<a class="icons email" title="Email" href="mailto:sreustle@gmail.com"></a>';
-		banner += '<a class="icons rss" title="RSS" href="http://shanereustle.com/blog/rss.xml"></a>';
 		banner += '</div></div></div>';
 		banner_el.innerHTML = banner;
 		wrapper.parentNode.insertBefore(banner_el, wrapper);
