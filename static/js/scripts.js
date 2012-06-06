@@ -9,7 +9,7 @@ var _vrq = _vrq || [];
 		banner += '<a class="icons twitter" title="Twitter" href="http://twitter.com/reustle/"></a>';
 		banner += '<a class="icons github" title="GitHub" href="http://github.com/reustle/"></a>';
 		banner += '<a class="icons linkedin" title="LinkedIn" href="http://linkedin.com/in/reustle/"></a>';
-		banner += '<a class="icons google" title="Google" href="http://profiles.google.com/sreustle/"></a>';
+		banner += '<a class="icons google" title="Google+" href="http://profiles.google.com/sreustle/"></a>';
 		banner += '<a class="icons email" title="Email" href="mailto:sreustle@gmail.com"></a>';
 		banner += '</div></div></div>';
 		banner_el.innerHTML = banner;
