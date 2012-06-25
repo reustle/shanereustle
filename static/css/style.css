@@ -84,12 +84,12 @@ a {
 	margin-left: 10px;
 }
 
-	.avatar img {
-		-moz-border-radius: 6px;
-		-webkit-border-radius: 6px;
-		-khtml-border-radius: 6px;
-		border-radius: 6px;
-	}
+.round_img, .avatar img {
+	-moz-border-radius: 6px;
+	-webkit-border-radius: 6px;
+	-khtml-border-radius: 6px;
+	border-radius: 6px;
+}
 
 /* Banner */
 
@@ -137,22 +137,22 @@ a {
 }
 
 #banner .twitter {
-	background: url('../img/social_icons.png') -68px 0px no-repeat;
+	background: url('../img/icons.png') -68px 0px no-repeat;
 }
 
 #banner .github {
-	background: url('../img/social_icons.png') -17px 0px no-repeat;
+	background: url('../img/icons.png') -17px 0px no-repeat;
 }
 
 #banner .linkedin {
-	background: url('../img/social_icons.png') -51px 0px no-repeat;
+	background: url('../img/icons.png') -51px 0px no-repeat;
 }
 
 #banner .google {
-	background: url('../img/social_icons.png') -34px 0px no-repeat;
+	background: url('../img/icons.png') -34px 0px no-repeat;
 }
 
 #banner .email {
-	background: url('../img/social_icons.png') 0px 0px no-repeat;
+	background: url('../img/icons.png') 0px 0px no-repeat;
 }
 
