@@ -55,28 +55,41 @@ a {
 	padding: 0px;
 	
 }
+	
+	#blog_index li {
+		border-bottom: 1px solid #555;
+		margin: 0px;
+	}
+	
+	#blog_index li:last-child {
+		border-bottom: 0px solid #fff;
+	}
+	
+	#blog_index li a {
+		text-decoration: none;
+		display: block;
+		padding: 8px 0px;
+	}
+	
+	#blog_index a:hover {
+		color: #e00;
+	}
+	
+	#blog_index .date {
+		float: right;
+	}
 
-#blog_index li {
-	border-bottom: 1px solid #555;
-	margin: 0px;
-}
-#blog_index li:last-child {
-	border-bottom: 0px solid #fff;
-}
-
-#blog_index li a {
-	text-decoration: none;
-	display: block;
-	padding: 8px 0px;
-}
-
-#blog_index a:hover {
-	color: #e00;
-}
-
-#blog_index .date {
+.avatar {
 	float: right;
+	margin-left: 10px;
 }
+
+	.avatar img {
+		-moz-border-radius: 6px;
+		-webkit-border-radius: 6px;
+		-khtml-border-radius: 6px;
+		border-radius: 6px;
+	}
 
 /* Banner */
 
