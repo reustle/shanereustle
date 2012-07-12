@@ -43,15 +43,15 @@ ubuntu     hard     nofile     350000
 <p>Backing up a running Mongo instance can be tricky. There are ways to lock the database while copying the files, to ensure no data corruption, but that downtime can be painful. The best way I've found to go about this is to use a script created by Eric Hammond called <a href='http://alestic.com/2009/09/ec2-consistent-snapshot'>ec2-consistent-snapshot</a> which has been modified by Eric Lubow to <a href='http://eric.lubow.org/2011/databases/mongodb/ec2-consistent-snapshot-with-mongo/'>include mongo support</a>. This script will freeze Mongo, freeze XFS if you're using it, and take a point in time snapshot of your data drive. This causes your database to be locked for a total of about 5 seconds, which is not bad at all compared to other methods. To install the script, there are a few packages you'll need to install. I've listed the sequence commands below that worked best for me.</p>
 
 <pre>
-sudo add-apt-repository ppa:alestic ;
-sudo apt-get update ;
-sudo apt-get install -y ec2-consistent-snapshot build-essential libio-socket-ssl-perl libdatetime-perl ;
+sudo add-apt-repository ppa:alestic &amp;&amp;
+sudo apt-get update &amp;&amp;
+sudo apt-get install -y ec2-consistent-snapshot build-essential libio-socket-ssl-perl libdatetime-perl &amp;&amp;
 
-sudo PERL_MM_USE_DEFAULT=1 cpan -fi MongoDB MongoDB::Admin ;
+sudo PERL_MM_USE_DEFAULT=1 cpan -fi MongoDB MongoDB::Admin &amp;&amp;
 
-cd /usr/bin/ ;
-sudo wget https://raw.github.com/elubow/ec2-consistent-snapshot/master/ec2-consistent-snapshot -O ec2-consistent-snapshot ;
-sudo chmod +x ec2-consistent-snapshot ;
+cd /usr/bin/ &amp;&amp;
+sudo wget https://raw.github.com/elubow/ec2-consistent-snapshot/master/ec2-consistent-snapshot -O ec2-consistent-snapshot &amp;&amp;
+sudo chmod +x ec2-consistent-snapshot
 </pre>
 
 <p>Once installed, you can start snapshotting your drive(s). In the command below, you're going to need to replace the AWS access key and secret key with your own. You'll also need to set the filesystem path if you are using XFS (otherwise remove it), and the volume ID(s) at the end.</p>
