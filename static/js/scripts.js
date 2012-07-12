@@ -5,13 +5,15 @@ var _vrq = _vrq || [];
 	var insert_banner = function(){
 		var banner_el = document.createElement('div');
 		var wrapper = document.getElementsByTagName('div')[0];
-		var banner = '<div id="banner"><div class="wrapper"><a href="/">Shane<span class="red">Reustle</span></a><div class="right">';
-		banner += '<a class="icons twitter" title="Twitter" href="http://twitter.com/reustle/"></a>';
-		banner += '<a class="icons github" title="GitHub" href="http://github.com/reustle/"></a>';
-		banner += '<a class="icons linkedin" title="LinkedIn" href="http://linkedin.com/in/reustle/"></a>';
-		banner += '<a class="icons google" title="Google+" href="http://profiles.google.com/sreustle/"></a>';
-		banner += '<a class="icons email" title="Email" href="mailto:sreustle@gmail.com"></a>';
-		banner += '</div></div></div>';
+		var banner = [
+			'<div id="banner"><div class="wrapper"><a href="/">Shane<span class="red">Reustle</span></a><div class="right">',
+			'<a class="icons twitter" title="Twitter" href="http://twitter.com/reustle/"></a>',
+			'<a class="icons github" title="GitHub" href="http://github.com/reustle/"></a>',
+			'<a class="icons forrst" title="Forrst" href="http://forrst.com/people/reustle"></a>',
+			'<a class="icons linkedin" title="LinkedIn" href="http://linkedin.com/in/reustle/"></a>',
+			'<a class="icons email" title="Email" href="mailto:sreustle@gmail.com"></a>',
+			'</div></div></div>'
+		].join('');
 		banner_el.innerHTML = banner;
 		wrapper.parentNode.insertBefore(banner_el, wrapper);
 	};
@@ -43,18 +45,6 @@ var _vrq = _vrq || [];
 	if(url_ends_with && url_ends_with == 'html'){
 		insert_return_link();
 	}
-	
-	// Insert Visual Revenue script :)
-	_vrq.push(['id', 141]);
-	_vrq.push(['automate', true]);
-	_vrq.push(['track', function(){}]);
-	(function(d, a){
-		var s = d.createElement(a);
-		var x = d.getElementsByTagName(a)[0];
-		s.async = true;
-		s.src = 'http://a.visualrevenue.com/vrs.js';
-		x.parentNode.insertBefore(s, x);
-	})(document, 'script');
 	
 })();
 
