@@ -11,7 +11,7 @@ var _vrq = _vrq || [];
 			'<a class="icons github" title="GitHub" href="http://github.com/reustle/"></a>',
 			'<a class="icons forrst" title="Forrst" href="http://forrst.com/people/reustle"></a>',
 			'<a class="icons linkedin" title="LinkedIn" href="http://linkedin.com/in/reustle/"></a>',
-			'<a class="icons email" title="Email" href="mailto:sreustle@gmail.com"></a>',
+			'<a class="icons email" title="Email" href="mailto:mail@shanereustle.com"></a>',
 			'</div></div></div>'
 		].join('');
 		banner_el.innerHTML = banner;
