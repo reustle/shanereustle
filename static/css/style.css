@@ -118,6 +118,17 @@ a {
 	margin-left: 1px;
 }
 
+#banner .soft {
+	color: #fff;
+	font-size: 10pt;
+	font-weight: normal;
+	margin-left: 2px;
+}
+#banner .soft a {
+	text-decoration: underline;
+	font-weight: normal;
+}
+
 #banner .wrapper {
 	width: 750px;
 	margin: 0px auto;
