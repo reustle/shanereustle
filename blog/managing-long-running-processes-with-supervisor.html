@@ -39,7 +39,7 @@ while True:
 	time.sleep(1)
 </pre>
 
-<p>When creating the conf file, be sure to replace <strong>/home/ubuntu</strong> both times with the path to your home directory. If you run test.py manually you'll see it prints out the time once per second.</p>
+<p>When creating the conf file, be sure to replace <strong>/home/ubuntu</strong> both times with the path to your home directory (~ isn't allowed). If you run test.py manually you'll see it prints out the time once per second.</p>
 
 <h2>Using SupervisorCTL</h2>
 <p>SupervisorCTL is the tool you will use to manage everything in Supervisor. Start by running <strong>sudo supervisorctl</strong> and then typing <strong>reread</strong>. The reread command goes through the conf.d directory and loads any new program conf files. Once you see the new test_python program available, you can use the add command to load and start it (<strong>add test_python</strong>). The <strong>status</strong> command shows you all running processes, their PID and how long they've been running. Here is a short list of my commonly used supervisorctl commands and what they do.</p>
