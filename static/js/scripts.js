@@ -5,15 +5,17 @@ var _vrq = _vrq || [];
 	var insert_banner = function(){
 		var banner_el = document.createElement('div');
 		var wrapper = document.getElementsByTagName('div')[0];
+		
+		// <span class="soft"> is <a href="/blog/freelance-software-engineer.html">available for hire</a>!</span>\
+		
 		var banner = '\
 			<div id="banner">\
 				<div class="banner_wrapper">\
 					<a href="/">Shane<span class="red">Reustle</span></a>\
-					<span class="soft"> is <a href="/blog/freelance-software-engineer.html">available for hire</a>!</span>\
 					<div class="right">\
 						<a class="icons twitter" title="Twitter" href="http://twitter.com/reustle/"></a>\
 						<a class="icons github" title="GitHub" href="http://github.com/reustle/"></a>\
-						<a class="icons forrst" title="Forrst" href="http://forrst.com/people/reustle"></a>\
+						<a class="icons forrst" title="Forrst" href="http://forrst.com/people/reustle/"></a>\
 						<a class="icons linkedin" title="LinkedIn" href="http://linkedin.com/in/reustle/"></a>\
 						<a class="icons email" title="Email" href="mailto:me@shanereustle.com"></a>\
 					</div>\

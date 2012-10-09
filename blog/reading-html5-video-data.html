@@ -20,7 +20,7 @@
 <h1>Reading HTML5 Video Data</h1>
 <h3>30 September 2011</h3>
 <p>One of the cooler features I've found in HTML5&#39;s new &#60;video&#62; tag is the ability to easily stream its content to a canvas. By passing the video element to the <strong>drawImage</strong> method of a canvas, along with some size parameters, you're able to create a duplicate output of the video. This opens up a whole new set of options for what you can do with your video data. We're going to use it to find the average color of the frame.</p>
-<p>Once you have your video piped into a canvas, you can use the <strong>getImageData</strong> method on the canvas to pull the current frame. This will return an ImageData object which includes a CanvasPixelArray list named data. The length of this list is <strong>video_width * video_height * 4</strong>, commonly known as RGBA format. For every pixel there is a red, green, blue and alpha value. By using every pixel on the canvas (or every 4 in our case, to increase speed), we are able to calculate the average color of the frame. In the example below, I set the average frame color as the background at 30fps. You can also see the average frame color listed below the video.</p>
+<p>Once you have your video piped into a canvas, you can use the <strong>getImageData</strong> method on the canvas to pull the current frame. This will return an ImageData object which includes a CanvasPixelArray list named data. The length of this list is <strong>video_width * video_height * 4</strong>, commonly known as RGBA format. For every pixel there is a red, green, blue and alpha value. By using every pixel on the canvas (or every 4 in our case, to increase speed), we are able to calculate the average color of the frame. In the example below, I set the average frame color as the background at 30fps. You can also see the average frame color listed below the video. You may need to use Google Chrome to see this example.</p>
 
 <video id='my_video' height='266' width='640' controls loop>
 	<source src='resources/cars2.webm' type='video/webm'/>
@@ -39,7 +39,7 @@
 	var my_canvas = document.getElementById('my_canvas');
 	var my_canvas_context = my_canvas.getContext('2d');
 	
-	function update_bg(){
+	var update_bg = function(){
 		
 		// If the video isn't playing, don't loop
 		if(my_video.paused || my_video.ended){
@@ -82,7 +82,7 @@
 		setTimeout(update_bg, 100);
 	}
 	
-	function init(){
+	var init = function(){
 		// Update the size of the canvas to match the video
 		my_canvas.width = my_video.width/2;
 		my_canvas.height = my_video.height/2;
