@@ -57,12 +57,12 @@ a {
 }
 	
 	#blog_index li {
-		border-bottom: 1px solid #555;
+		border-bottom: 1px solid #eee;
 		margin: 0px;
 	}
 	
 	#blog_index li:last-child {
-		border-bottom: 0px solid #fff;
+		border-width: 0px;
 	}
 	
 	#blog_index li a {
@@ -155,12 +155,12 @@ a {
 	background: url('../img/icons.png') -17px 0px no-repeat;
 }
 
-#banner .forrst {
-	background: url('../img/icons.png') -85px 0px no-repeat;
-}
-
 #banner .linkedin {
 	background: url('../img/icons.png') -51px 0px no-repeat;
+}
+
+#banner .flickr {
+	background: url('../img/icons.png') -102px 0px no-repeat;
 }
 
 #banner .email {

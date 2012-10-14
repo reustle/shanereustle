@@ -13,11 +13,11 @@ var _vrq = _vrq || [];
 				<div class="banner_wrapper">\
 					<a href="/">Shane<span class="red">Reustle</span></a>\
 					<div class="right">\
-						<a class="icons twitter" title="Twitter" href="http://twitter.com/reustle/"></a>\
-						<a class="icons github" title="GitHub" href="http://github.com/reustle/"></a>\
-						<a class="icons forrst" title="Forrst" href="http://forrst.com/people/reustle/"></a>\
-						<a class="icons linkedin" title="LinkedIn" href="http://linkedin.com/in/reustle/"></a>\
-						<a class="icons email" title="Email" href="mailto:me@shanereustle.com"></a>\
+						<a class="icons twitter" title="Twitter" target="_blank" href="http://twitter.com/reustle/"></a>\
+						<a class="icons github" title="GitHub" target="_blank" href="http://github.com/reustle/"></a>\
+						<a class="icons linkedin" title="LinkedIn" target="_blank" href="http://linkedin.com/in/reustle/"></a>\
+						<a class="icons flickr" title="Flickr" target="_blank" href="http://flickr.com/photos/reustle/"></a>\
+						<a class="icons email" title="Email" target="_blank" href="mailto:me@shanereustle.com"></a>\
 					</div>\
 				</div>\
 			</div>\
