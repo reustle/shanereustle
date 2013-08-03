@@ -18,7 +18,7 @@ def blog_entry(slug):
 	if slug == 'freelance-software-engineer':
 		slug = 'freelance-software-developer'
 	
-	return redirect('http://reustle.io/blog/' + slug + '.html', 301)
+	return redirect('http://reustle.io/blog/' + slug, 301)
 
 if __name__ == '__main__':
 	app.run(port=SETTINGS.port, debug=True)
