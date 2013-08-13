@@ -1,0 +1,96 @@
+<!doctype html>
+<html lang='en'>
+	<head>
+		
+		<title>Shane Reustle | Globetrotting Freelance Software Developer</title>
+		<meta name='description' content='Shane Reustle is a globetrotting freelance software developer who writes about traveling and programming.'>
+		<meta name='viewport' content='width=device-width, initial-scale=1'>
+		
+		<link rel='stylesheet' href='/static/lib/bootstrap/bootstrap.min.css'>
+		<link rel='stylesheet' href='/static/style.css'>
+		<link rel='stylesheet' href='http://fonts.googleapis.com/css?family=Open+Sans:400,600' type='text/css'>
+	
+	</head>
+	<body>
+		
+		<div class='container'>
+			<div class='row'>
+				
+				<div class='sidebar_container col-lg-3 col-lg-offset-1 col-3'>
+					<!-- Sidebar -->
+					
+					<div class='avatar_container'><a href='/' title='Shane Reustle' class='img-circle avatar'></a></div>
+					
+					<p><a href='#' class='howdy_link'>Howdy</a>, I'm Shane Reustle.</p>
+					<p>I'm a globetrotting <a href='/blog/freelance-software-developer'>software developer</a> and <a href='http://statuschart.com/reustle'>event organizer</a>. I <a href='http://flickr.com/photos/reustle'>take photos</a> and <a href='http://www.flickr.com/photos/reustle/9043255483/lightbox/'>ride motorcycles</a>. Feel free to <a href='mailto:me@shanereustle.com'>shoot me an email</a> or <a href='http://twitter.com/reustle/'>follow me on twitter</a>.</p>
+					
+					<!-- Sidebar END -->
+				</div>
+				<div class='content_container col-lg-7 col-7'>
+					<!-- Content -->
+					
+					{{#list_page}}
+						<div class='article_list white_box'>
+							<ul>
+								{{#articles_list}}
+									<li>
+										<a href='{{slug}}'>
+											<div class='timestamp'>{{date}}</div>
+											{{title}}
+										</a>
+									</li>
+								{{/articles_list}}
+							</ul>
+						</div>
+					{{/list_page}}
+					
+					{{#articles}}
+						<div class='article_row white_box'>
+							<a href='/blog/' class='timestamp pull-right'>{{date}}</a>
+							<h1 class='lead'><a href='/blog/{{slug}}'>{{title}}</a></h1>
+							{{{content}}}
+						</div>
+					{{/articles}}
+
+					<div class='footer_row'>
+						{{#index_page}}
+							
+							{{#next_page}}
+								<h4 class='pull-right'><a href='/blog/page{{next_page}}/'>Newer Articles &raquo;</a></h4>
+							{{/next_page}}
+							{{#prev_page}}
+								<h4><a href='/blog/page{{prev_page}}/'>&laquo; Older Articles</a></h4>
+							{{/prev_page}}
+							
+						{{/index_page}}
+						
+						{{^index_page}}{{^articles_list}}
+							<h4><a href='/blog/'>&laquo; Blog Index</a></h4>
+						{{/articles_list}}{{/index_page}}
+					</div>
+					
+					<!-- Content END -->
+				</div>
+				
+			</div>
+		</div>
+		
+		<script src='/static/lib/jquery.js'></script>
+		<script src='/static/lib/bootstrap/bootstrap.min.js'></script>
+		<script src='/static/scripts.js'></script>
+		<script type='text/javascript'>
+			// clicky.com analytics
+			var clicky_site_ids = clicky_site_ids || [];
+			clicky_site_ids.push(100640032);
+			(function() {
+				var s = document.createElement('script');
+				s.type = 'text/javascript';
+				s.async = true;
+				s.src = '//static.getclicky.com/js';
+				( document.getElementsByTagName('head')[0] || document.getElementsByTagName('body')[0] ).appendChild( s );
+			})();
+		</script>
+		
+	</body>
+</html>
+

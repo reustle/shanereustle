@@ -1,0 +1,6 @@
+<p>This week while trying to get a new replica set member up and running, I ran into some issues. After the new member copied the data over from the primary and began to replicate, the lock percentage would shoot up to 100%, along with the CPU usage. At this point, replication would lock up, doing somewhere around 10 operations per second (nowhere near the primary). After a few hours, the secondary would be at 100,000 seconds delayed and it was well past the point of no return. I repeated the process and the same thing happened, so I started digging and filed a mailing list post.</p>
+
+<p>Turns out there was a bug in Mongo where if you have a capped collection on the primary, it will not carry over the indexes to the secondary, including the _id index. This caused the secondary to replicate very slowly. In our case, we didn't even have indexes on the capped collections to begin with, so it wasn't obvious this was the issue.</p>
+
+<p>To get around it, I killed mongod on the secondary, started it up without the --replset flag, and added the _id index to all capped collections. Then, after restarting mongod with the --replset flag, it replicated quickly and stayed up to date. Kristina Chodorow at 10gen has filed a major bug report <a href='https://jira.mongodb.org/browse/SERVER-5649'>here</a>.</p>
+

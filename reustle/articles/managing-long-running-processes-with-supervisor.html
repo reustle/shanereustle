@@ -1,0 +1,76 @@
+<p><a href='http://supervisord.org/'>Supervisor</a> is a great tool to start and manage long-running processes and the log files associated with them. It offers a lot of helpful features and is easy to get up and running.</p>
+
+<h4>Install &amp; Start Supervisor</h4>
+<p>Supervisor works out of the box, so this part is easy.</p>
+<pre>sudo apt-get install supervisor -y && sudo supervisord</pre>
+
+<h4>Our First Program</h4>
+<p>Supervisor looks for configuration files in <strong>/etc/supervisor/conf.d/</strong> and it is a good idea to keep a single conf file per process. To start, let's set up a simple long-running python script. Don't pay too much attention to the contents of the conf file, we'll go over that later.</p>
+
+<em>Create /etc/supervisor/conf.d/test_python.conf containing:</em>
+<pre>
+[program:test_python]
+command=python -u test.py
+directory=/home/ubuntu
+stdout_logfile=/home/ubuntu/test_python_output.txt
+redirect_stderr=true
+</pre>
+
+<em>Create ~/test.py containing:</em>
+<pre>
+import time
+while True:
+	print(time.ctime())
+	time.sleep(1)
+</pre>
+
+<p>When creating the conf file, be sure to replace <strong>/home/ubuntu</strong> both times with the path to your home directory (~ isn't allowed). If you run test.py manually you'll see it prints out the time once per second.</p>
+
+<h4>Using SupervisorCTL</h4>
+<p>SupervisorCTL is the tool you will use to manage everything in Supervisor. Start by running <strong>sudo supervisorctl</strong> and then typing <strong>reread</strong>. The reread command goes through the conf.d directory and loads any new program conf files. Once you see the new test_python program available, you can use the add command to load and start it (<strong>add test_python</strong>). The <strong>status</strong> command shows you all running processes, their PID and how long they've been running. Here is a short list of my commonly used supervisorctl commands and what they do.</p>
+<ul>
+	<li><strong>reread</strong> - Reload all program conf files from the conf.d directory.</li>
+	<li><strong>add [program_name]</strong> - Add a newly created conf file to Supervisor and start the process.</li>
+	<li><strong>status</strong> - Check the status of all programs currently managed by Supervisor.</li>
+	<li><strong>start [program_name]</strong> - Start the given program. Used often with one-time scripts.</li>
+	<li><strong>restart [program_name]</strong> - Restart the given program.</li>
+	<li><strong>tail -f [program_name]</strong> - Watch the log file in real-time (same as UNIX tail -f [filename]).</li>
+	<li><strong>help</strong> - List all available commands.</li>
+</ul>
+<p>Exit supervisorctl and check your log file (~/test_python_output.txt) to see that it is still running. If it isn't, you may have missed a step.</p>
+
+<h4>Program Configuration Files</h4>
+<p>There is a wide array of options you can use while setting up your program configuration file. I've listed my favorite options below. For a full list of commands and their parameters, check out <a href='http://supervisord.org/configuration.html#program-x-section-settings'>the settings documentation</a>.</p>
+<ul>
+	<li><strong>command</strong> is the command to run.</li>
+	<li><strong>directory</strong> is the directory to run the command in.</li>
+	<li><strong>numprocs</strong> will automatically start N instances of that process.</li>
+	<li><strong>autostart</strong> is a boolean which tells whether to run automatically or not when Supervisor starts.</li>
+	<li><strong>autorestart</strong> will automatically restart a program that dies, under specific conditions (see docs).</li>
+	<li><strong>stdout_logfile</strong> is where to log the output of your program.</li>
+	<li><strong>redirect_stderr</strong> tells supervisor whether to include stderr in your standard output file.</li>
+	<li><strong>stdout_logfile_maxbytes</strong> is the size a log file is allowed to grow to until it is auto rotated.</li>
+	<li><strong>stdout_logfile_backups</strong> is the number of rotated log files to keep.</li>
+</ul>
+
+<h4>Web Interface</h4>
+<p>Supervisor provides a really nifty web interface to monitor and restart your processes. Just update the following file, restart supervisor, and you'll see it on port 9001. Feel free to change the port and protect it using HTTP Auth or whatever you see fit.</p>
+<em>Add the following to /etc/supervisor/supervisord.conf</em>
+<pre>
+[inet_http_server] 
+port=*:9001
+</pre>
+
+<h4>One-Time Scripts</h4>
+<p>I've found that Supervisor also works great for running commonly used scripts that have multiple parameters or large log files. Be sure to set <strong>autostart</strong> and <strong>autorestart</strong> in the conf file to false, so your script doesn't end up running repeatedly.</p>
+
+<h4>Examples</h4>
+<p>MongoDB</p>
+<pre>
+[program:mongod_member]
+command=/home/ubuntu/mongodb-linux-x86_64-2.0.6/bin/mongod --dbpath /mnt/mongo/ --replSet mongo5 --nojournal
+directory=/home/ubuntu
+stdout_logfile=/mnt/log/mongod.log
+redirect_stderr=true
+</pre>
+
