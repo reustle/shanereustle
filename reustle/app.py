@@ -1,6 +1,6 @@
 import pystache
 import json
-from flask import Flask, abort
+from flask import Flask, abort, redirect
 import settings as SETTINGS
 app = Flask(__name__)
 
@@ -87,6 +87,22 @@ def blog_index_older(blog_page):
 	
 	return blog_index(blog_page)
 
+@app.route('/blog/<slug>.html')
+def blog_article_legacy(slug):
+	"""
+		ShaneReustle.com/blog/article-name.html redirects
+		to Reustle.io/blog/article-name.html, remove the
+		.html with a 301 redirect
+	"""
+	
+	# Handle freelance blog post name change
+	if slug == 'freelance-software-engineer':
+		slug = 'freelance-software-developer'
+	
+	article_url = '/blog/' + slug
+	
+	return redirect(article_url, 301)
+
 @app.route('/blog/<slug>')
 def blog_article(slug):
 	""" An individual blog article """
@@ -101,7 +117,6 @@ def blog_article(slug):
 			article_data = article
 	
 	if not article_data:
-		
 		return abort(404)
 	
 	return load_template({
