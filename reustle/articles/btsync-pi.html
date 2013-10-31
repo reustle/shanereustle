@@ -1,6 +1,6 @@
 <p><center><img src='/static/blog_resources/rpihdd.jpg' class='img-responsive img-rounded' alt='Raspberry Pi BTSync Setup' /></center></p>
 
-<p>After constantly hitting my Dropbox space limit, I decided to build my own distributed backup tool. What I ended up with was an external hard drive with a dedicated Raspberry Pi that keeps in sync with my laptop over the internet using BitTorrent Sync. This new btsync folder fully replaced my Dropbox folder, and allowed me to streamline my large media backups. I've explained every step of the build below.</p>
+<p>After constantly hitting my Dropbox space limit, I decided to build my own distributed backup tool. What I ended up with was an external hard drive with a dedicated Raspberry Pi that keeps in sync with my laptop over the internet using BitTorrent Sync. This new BTSync folder fully replaced my Dropbox folder, and allowed me to streamline my large media backups. I've explained every step of the build below.</p>
 
 <h4>Recommended Hardware</h4>
 <p>These are the items you'll need if you want to duplicate what I've built. If you're building more than 1 node, I highly recommend you buy different brand external hard drives (eg. 1 Western Digital, 1 Seagate, etc). Even different models should be sufficient. If it turns out one goes bad after a year, chances are the second won't die as well.</p>
@@ -12,13 +12,14 @@
 </ul>
 
 <h4>Install Raspbian</h4>
-<p>Grab the <a href='http://www.raspberrypi.org/downloads'>latest version of NOOBS</a> (New Out of Box Software). NOOBS makes it easy to get the Raspbian OS up and running on your Raspberry Pi, along with setting some basic config options. Once you have it downloaded, copy the contents of the zip onto a freshly formatted SD card (FAT filesystem). For more detailed setup instructions, check out the installation readme included in the downloaded zip archive.</p>
-<p>Once you boot up your Raspberry Pi with this SD card and install Raspbian, you'll be given a few more options. I usually do the following things:</p>
+<p>Grab the <a href='http://www.raspberrypi.org/downloads'>latest version of NOOBS</a> (New Out of Box Software). NOOBS makes it easy to get the Raspbian OS up and running on your Raspberry Pi, along with setting some basic config options. Once you have it downloaded, copy the contents of the zip onto a freshly formatted SD card (FAT filesystem).</p>
+<p>Once you boot up your Raspberry Pi with this SD card and install Raspbian, you'll be given a few more options. These are the settings I usually change, but you should also look around yourself to see what's available.</p>
 <ul>
 	<li>Enable SSH</li>
 	<li>Set the overclocking level to mild</li>
 	<li>Configure a unique hostname</li>
 </ul>
+<p>For more detailed setup instructions, check out the installation readme included in the downloaded zip archive.</p>
 
 <h4>Fix the Keyboard Layout</h4>
 <p>If you're using a USB keyboard, you may notice that some of the characters aren't being entered correctly. To switch your keyboard layout from the default of English (UK) to English (US), you can follow the simple instructions after running this command.</p>
@@ -28,7 +29,7 @@
 <p>Assuming you've turned on your Raspberry Pi with the wifi dongle inserted, you can move onto <a href='http://www.howtogeek.com/167425/how-to-setup-wi-fi-on-your-raspberry-pi-via-the-command-line/'>configuring the wifi connection</a>. You may want to give it a fixed IP address to make connecting to it from another machine easier. You'll find it is much quicker to SSH into the device rather than hook up a keyboard and monitor every time you want to tweak something.</p>
 
 <h4>Connect the External Drive</h4>
-<p>I haven't had any issues with disks formatted using EXT3 or EXT4, so using one of those for your external disk is recommended. You can use <strong>sudo fdisk -l</strong> to find the path of the disk (probably <strong>/dev/sda1</strong>), which you'll need for mounting. Here's how to mount it. Don't forget to change <strong>EXT4</strong> below to whatever you used.</p>
+<p>I haven't had any issues with disks formatted using ext3 or ext4, so using one of those for your external disk is recommended. You can use <strong>sudo fdisk -l</strong> to find the path of the disk (probably <strong>/dev/sda1</strong>), which you'll need for mounting. Here's how to mount it. Don't forget to change <strong>ext4</strong> below to whatever you used.</p>
 <pre>sudo mkdir /media/external_disk
 sudo mount -t ext4 /dev/sda1 /media/external_disk</pre>
 <p>Once you verify that works and you can access your files on the disk (if any), you should be able to add the disk to <strong>/etc/fstab</strong> by adding a new line like this</p>
