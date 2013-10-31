@@ -5,6 +5,7 @@ body {
 	padding: 0px;
 	background: #f6f6f6;
 	font-family: 'Open Sans', 'Helvetica Neue', sans-serif;
+	visibility: visible !important;
 }
 
 .white_box {
@@ -17,6 +18,9 @@ body {
 h1, h2, h3, h4, h5, h6 {
 	font-family: 'Open Sans', 'Helvetica Neue', sans-serif;
 	font-weight: 600;
+}
+h4 {
+	margin-top: 25px;
 }
 
 /* Sidebar */
