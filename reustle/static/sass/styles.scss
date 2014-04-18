@@ -64,6 +64,21 @@ p {
     a, a:focus, a:hover {
         color: #fff;
     }
+	
+	.down-arrow-container {
+		height: 50px;
+		width: 100%;
+		margin-right: auto;
+		margin-left: auto;
+		position: absolute;
+		text-align: center;
+		bottom: 0px;
+		
+		img {
+			opacity: 0.25;
+		}
+		
+	}
     
     .v-center {
         display: table-cell;
