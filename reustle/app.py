@@ -97,5 +97,5 @@ def blog_article(slug):
 	})
 
 if __name__ == '__main__':
-	app.run(port=SETTINGS.port, debug=True)
+	app.run(port=SETTINGS.port, debug=SETTINGS.debug)
 
