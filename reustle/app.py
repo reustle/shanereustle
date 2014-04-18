@@ -16,10 +16,10 @@ def read_file(filename):
 	
 	return file_contents.encode('utf-8')
 	
-def load_template(template_params):
+def load_template(template_params, filename='template'):
 	""" Load the template and apply the given parameters """
 	
-	template_html = read_file('template.html')
+	template_html = read_file('templates/' + filename + '.html')
 
 	return pystache.render(template_html, template_params)
 
@@ -41,34 +41,7 @@ def load_blog_index():
 def blog_index(blog_page=1):
 	""" The list of blog articles and their content """
 	
-	articles_per_page = 4
-	articles = load_blog_index()
-	
-	offset = blog_page - 1
-	
-	start = offset * articles_per_page
-	end = start + articles_per_page
-	
-	last_page = False
-	if end >= len(articles):
-		last_page = True
-	
-	articles = articles[start:end]
-	
-	next_page = False
-	if blog_page > 1:
-		next_page = blog_page - 1
-	
-	prev_page = False
-	if not last_page:
-		prev_page = blog_page + 1
-	
-	return load_template({
-		'index_page' : True,
-		'prev_page' : prev_page,
-		'next_page' : next_page,
-		'articles' : articles
-	})
+	return load_template({}, filename='splash')
 
 @app.route('/blog/')
 def blog_list():
