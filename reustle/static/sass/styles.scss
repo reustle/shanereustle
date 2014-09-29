@@ -217,6 +217,66 @@ p {
 				}
 			}
 		}
+		
+		.photos-block {
+			
+			text-align: center;
+			line-height: 0px;
+			
+			.photo-box {
+				display: inline-block;
+				margin: 6px 4px;
+				
+				.photo-title {
+					position: absolute;
+					text-align: right;
+					margin-top: 154px;
+					padding-right: 5px;
+					text-transform: uppercase;
+					font-size: 12px;
+					font-weight: bold;
+					z-index: 100;
+					width: 300px;
+					height: 30px;
+					display: none;
+					text-shadow: 0px 0px 4px rgba(0, 0, 0, 1),
+						0px 0px 4px rgba(0, 0, 0, 1);
+						
+					
+					$animation-speed: .4s;
+					-webkit-animation-duration: $animation-speed;
+					-moz-animation-duration: $animation-speed;
+					-ms-animation-duration: $animation-speed;
+					-o-animation-duration: $animation-speed;
+					animation-duration: $animation-speed;
+				
+				}
+				
+				img {
+					-webkit-transition: all .4s;
+					-moz-transition: all .4s;
+					-ms-transition: all .4s;
+					-o-transition: all .4s;
+					transition: all .4s;
+				}
+				img:not(:hover) {
+					$grayscale-level: 50%;
+					
+					-webkit-filter: grayscale($grayscale-level);
+					-moz-filter: grayscale($grayscale-level);
+					-ms-filter: grayscale($grayscale-level);
+					-o-filter: grayscale($grayscale-level);
+					filter: grayscale($grayscale-level);
+				}
+				img:hover {
+					-webkit-filter: grayscale(0%);
+					-moz-filter: grayscale(0%);
+					-ms-filter: grayscale(0%);
+					-o-filter: grayscale(0%);
+					filter: grayscale(0%);
+				}
+			}
+		}
 	}
 }
 

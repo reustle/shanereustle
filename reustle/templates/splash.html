@@ -95,6 +95,60 @@
 						</ul>
 					</div>
 				</div>
+				
+				<div class='col-md-12 photos-block'>
+					
+					<div class='photo-box'>
+						<div class='photo-title animated'>Machu Picchu, Peru</div>
+						<img src='./static/images/photos/photo3.jpg' class='img-responsive'/>
+					</div>
+					<div class='photo-box'>
+						<div class='photo-title animated'>Aguas Calientes, Peru</div>
+						<img src='./static/images/photos/photo4.jpg' class='img-responsive'/>
+					</div>
+					<div class='photo-box'>
+						<div class='photo-title animated'>New York City, USA</div>
+						<img src='./static/images/photos/photo6.jpg' class='img-responsive'/>
+					</div>
+					<div class='photo-box'>
+						<div class='photo-title animated'>Adirondacks, USA</div>
+						<img src='./static/images/photos/photo5.jpg' class='img-responsive'/>
+					</div>
+					<div class='photo-box'>
+						<div class='photo-title animated'>Fl&aring;am, Norway</div>
+						<img src='./static/images/photos/photo12.jpg' class='img-responsive'/>
+					</div>
+					<div class='photo-box'>
+						<div class='photo-title animated'>Fl&aring;m, Norway</div>
+						<img src='./static/images/photos/photo2.jpg' class='img-responsive'/>
+					</div>
+					<div class='photo-box'>
+						<div class='photo-title animated'>&aring;rhus, Denmark</div>
+						<img src='./static/images/photos/photo9.jpg' class='img-responsive'/>
+					</div>
+					<div class='photo-box'>
+						<div class='photo-title animated'>Copenhagen, Denmark</div>
+						<img src='./static/images/photos/photo11.jpg' class='img-responsive'/>
+					</div>
+					<div class='photo-box'>
+						<div class='photo-title animated'>Pennsylvania, USA</div>
+						<img src='./static/images/photos/photo8.jpg' class='img-responsive'/>
+					</div>
+					<div class='photo-box'>
+						<div class='photo-title animated'>Arkansas, USA</div>
+						<img src='./static/images/photos/photo10.jpg' class='img-responsive'/>
+					</div>
+					<div class='photo-box'>
+						<div class='photo-title animated'>Saint Martin, Caribbean</div>
+						<img src='./static/images/photos/photo7.jpg' class='img-responsive'/>
+					</div>
+					<div class='photo-box'>
+						<div class='photo-title animated'>Dry Tortugas, USA</div>
+						<img src='./static/images/photos/photo1.jpg' class='img-responsive'/>
+					</div>
+					
+				</div>
+				
 			</div>
 			
 			<br/>&nbsp;
@@ -112,6 +166,15 @@
 			
 			ga('create', 'UA-2580539-25', 'reustle.io');
 			ga('send', 'pageview');
+			
+			$('.photo-box').mouseover(function(){
+				$(this).find('.photo-title').removeClass('fadeOut').addClass('fadeIn').show();
+			});
+			
+			$('.photo-box').mouseout(function(){
+				$(this).find('.photo-title').removeClass('fadeIn').addClass('fadeOut');
+			});
+			
 		</script>
 	</body>
 </html>
