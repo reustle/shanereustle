@@ -255,6 +255,7 @@ p {
   z-index: 100;
   width: 300px;
   height: 30px;
+  color: #fff;
   display: none;
   text-shadow: 0px 0px 4px black, 0px 0px 4px black;
   -webkit-animation-duration: 0.4s;
@@ -263,7 +264,7 @@ p {
   -o-animation-duration: 0.4s;
   animation-duration: 0.4s;
 }
-/* line 255, ../sass/styles.scss */
+/* line 256, ../sass/styles.scss */
 .panel-about .about-content .photos-block .photo-box img {
   -webkit-transition: all .4s;
   -moz-transition: all .4s;
@@ -271,7 +272,7 @@ p {
   -o-transition: all .4s;
   transition: all .4s;
 }
-/* line 262, ../sass/styles.scss */
+/* line 263, ../sass/styles.scss */
 .panel-about .about-content .photos-block .photo-box img:not(:hover) {
   -webkit-filter: grayscale(50%);
   -moz-filter: grayscale(50%);
@@ -279,7 +280,7 @@ p {
   -o-filter: grayscale(50%);
   filter: grayscale(50%);
 }
-/* line 271, ../sass/styles.scss */
+/* line 272, ../sass/styles.scss */
 .panel-about .about-content .photos-block .photo-box img:hover {
   -webkit-filter: grayscale(0%);
   -moz-filter: grayscale(0%);
