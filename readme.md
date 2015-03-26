@@ -1,4 +1,3 @@
-reustle
-=======
+# ShaneReustle.com
 
-The code for shanereustle.com
+The source for shanereustle.com
