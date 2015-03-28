@@ -1,0 +1,157 @@
+<!DOCTYPE html>
+<html>
+	<head>
+		<meta charset='utf-8'>
+		<meta http-equiv='X-UA-Compatible' content='IE=edge'>
+		<meta name='viewport' content='width=device-width, initial-scale=1'>
+		
+		<title>Running MongoDB on Amazon Web Services | Shane Reustle</title>
+		<link rel='canonical' href='http://shanereustle.com/blog/running-mongodb-on-amazon-web-services'>
+		
+		<link href='/static/lib/bootstrap/css/bootstrap.min.css' rel='stylesheet'>
+		<link href='/css/main.css' rel='stylesheet'>
+		
+	</head>
+	<body>
+		
+		<nav class='navbar navbar-inverse navbar-fixed-top'>
+			<div class='container'>
+				<div class='row'>
+					<div class='col-md-8 col-md-offset-2'>
+						<div class='navbar-header'>
+							<button type='button' class='navbar-toggle collapsed' data-toggle='collapse' data-target='.navbar-collapse' aria-expanded='false' aria-controls='navbar'>
+								<span class='sr-only'>Toggle navigation</span>
+								<span class='icon-bar'></span>
+								<span class='icon-bar'></span>
+								<span class='icon-bar'></span>
+							</button>
+							<a class='navbar-brand' href='/'>Shane Reustle</a>
+						</div>
+						<div id='navbar' class='collapse navbar-collapse'>
+							<ul class='nav navbar-nav'>
+								
+								<li><a href='/'>Home</a></li>
+								<li class='active'><a href='/blog/'>Articles</a></li>
+								<!--<li><a href='/photography/'>Photography</a></li>
+								<li><a href='/newsletter'>Newsletter</a></li>-->
+								
+							</ul>
+							<ul class='nav navbar-nav navbar-right'>
+								
+								<li class='drodown'>
+									<a href='#' class='dropdown-toggle' data-toggle='dropdown'>Contact <span class='caret'></span></a>
+									<ul class='dropdown-menu'>
+										<li><a href='mailto:me@shanereustle.com'>Email</a></li>
+										<li><a href='http://facebook.com/shanereustle'>Facebook</a></li>
+										<li><a href='http://twitter.com/reustle'>Twitter</a></li>
+									</ul>
+								</li>
+								
+							</ul>
+						</div><!--/.nav-collapse -->
+					</div>
+				</div>
+			</div>
+		</nav>
+		
+		<div class='container'>
+			
+			<div class='row'>
+				<div class='col-md-8 col-md-offset-2'>
+					
+					<h1>Running MongoDB on Amazon Web Services</h1>
+
+<p>I’ve spent the past few months managing and scaling multiple MongoDB clusters on AWS, and have picked up a few tricks along the way. They may help you as you are <a href="http://docs.mongodb.org/manual/installation/#installation-guides">setting up your first Mongo instance</a>, or trying to keep your existing instances running smoothly.</p>
+
+<h2 id="choosing-an-ami">Choosing an AMI</h2>
+
+<p>Whenever I’m starting an instance from scratch, rather than using one of my own AMIs, I will use an Ubuntu AMI from <a href="http://alestic.com/">Eric Hammond</a>. They make it very easy to get an instance up and running immediately. One thing to note with picking which AMI to use is that Ubuntu 10.04 does not play well with EBS. I had some weird problems like Mongo locking up entirely for 5 minutes at a time due to 100% disk utilization. After getting everything over to 11.10, disk utilization stayed down.</p>
+
+<h2 id="updating-the-file-limit">Updating the file limit</h2>
+
+<p>A good practice when setting up a fresh instance for Mongo is to raise the limit of open files allowed by the system. Mongo likes to keep a lot of files open for writing, so as your db grows past a few hundred GB, you may find yourself hitting the default limits. You can also update this after a machine has been running, but the change still requires a restart. To raise the limit, you’ll need to modify the config files listed below.</p>
+
+<p><em>Overwrite /etc/sysctl.conf with</em></p>
+
+<div class="highlight"><pre><code class="language-bash" data-lang="bash">fs.file-max <span class="o">=</span> 360000
+net.ipv4.ip_local_port_range <span class="o">=</span> <span class="m">1024</span> 65000
+net.ipv4.tcp_max_syn_backlog <span class="o">=</span> 2048</code></pre></div>
+
+<p><em>Overwrite /etc/security/limits.conf with</em></p>
+
+<div class="highlight"><pre><code class="language-bash" data-lang="bash">ubuntu     soft     nofile     350000
+ubuntu     hard     nofile     350000</code></pre></div>
+
+<p>Once those changes are made, restart the system and you’re good to go. You can run <em>ulimit -a</em> to make sure the limit has been updated properly.</p>
+
+<h2 id="log-file-location">Log file location</h2>
+
+<p>When you get around to starting Mongo, you’re going to need to make some decisions such as where the log file is located (–logpath). I found that putting the log file on a separate disk from the DB data itself is a good idea. Since it will get unruly over time, valuable resources will be taken from your primary DB disk, slowing things down. I have yet to come up with an elegant solution to auto rotating these logs, but will probably end up using the logrotate tool in linux. If you have any other solutions, I’d be interested in hearing them.</p>
+
+<h2 id="backing-up-your-data">Backing up your data</h2>
+
+<p>Backing up a running Mongo instance can be tricky. There are ways to lock the database while copying the files, to ensure no data corruption, but that downtime can be painful. The best way I’ve found to go about this is to use a script created by Eric Hammond called <a href="http://alestic.com/2009/09/ec2-consistent-snapshot">ec2-consistent-snapshot</a> which has been modified by Eric Lubow to <a href="http://eric.lubow.org/2011/databases/mongodb/ec2-consistent-snapshot-with-mongo/">include mongo support</a>. This script will freeze Mongo, freeze XFS if you’re using it, and take a point in time snapshot of your data drive. This causes your database to be locked for a total of about 5 seconds, which is not bad at all compared to other methods. To install the script, there are a few packages you’ll need to install. I’ve listed the sequence commands below that worked best for me.</p>
+
+<div class="highlight"><pre><code class="language-bash" data-lang="bash">sudo add-apt-repository ppa:alestic
+sudo apt-get update
+sudo apt-get install -y ec2-consistent-snapshot build-essential libio-socket-ssl-perl libdatetime-perl
+
+sudo <span class="nv">PERL_MM_USE_DEFAULT</span><span class="o">=</span><span class="m">1</span> cpan -fi MongoDB MongoDB::Admin
+
+<span class="nb">cd</span> /usr/bin/
+sudo wget https://raw.github.com/elubow/ec2-consistent-snapshot/master/ec2-consistent-snapshot -O ec2-consistent-snapshot
+sudo chmod +x ec2-consistent-snapshot</code></pre></div>
+
+<p>Once installed, you can start snapshotting your drive(s). In the command below, you’re going to need to replace the AWS access key and secret key with your own. You’ll also need to set the filesystem path if you are using XFS (otherwise remove it), and the volume ID(s) at the end.</p>
+
+<div class="highlight"><pre><code class="language-bash" data-lang="bash">ec2-consistent-snapshot --debug --mongo --aws-access-key-id<span class="o">=</span>ABCDEFGHI --aws-secret-access-key<span class="o">=</span>ABCDEFG --xfs-filesystem<span class="o">=</span>/ebs_disk/ --region us-east-1 --description <span class="s2">&quot;MongoDB Manual Snapshot&quot;</span> vol-VOLID</code></pre></div>
+
+<h2 id="munin-graphs">Munin graphs</h2>
+
+<p>To monitor my servers, I use <a href="http://munin-monitoring.org/">Munin Monitoring</a> software. It helps me keep an eye on memory usage and disk latency (important to watch) on my Mongo servers, among many other things. I use the official <a href="https://github.com/erh/mongo-munin">MongoDB Munin plugins</a> for standard things like ops/sec and lock percentage, but found myself constantly needing a graph showing the replication delay between replica set members. I eventually wrote this <a href="https://github.com/reustle/munin-mongo-replication">Mongo replication delay plugin</a>, which adds itself to the same group as the other mongo plugins on the overview page.</p>
+
+<p>Hopefully you’ve picked up a thing or two from this post that you can use. If you are having second thoughts about managing your own Mongo instances, you should definitely check out <a href="https://www.compose.io/mongodb/">Compose.io</a>. Feel free to contact me if you have any other questions. Enjoy!</p>
+
+
+
+<div class='row'>
+	
+	<div class='col-md-4'>
+		<a href='/blog/' class='btn btn-default footer-action'><span class='glyphicon glyphicon-chevron-left'></span> Back to Article List</a>
+	</div>
+	
+	<div class='col-md-4 article-date text-center'>
+		Apr 25, 2012
+	</div>
+	
+	<div class='col-md-4 text-right'>
+		<a href='http://twitter.com/reustle' class='btn btn-default footer-action'>Follow on Twitter</a>
+	</div>
+
+</div>
+
+
+					
+				</div>
+			</div>
+			
+		</div>
+		
+		<script src='/static/lib/jquery-1.11.1.min.js'></script>
+		<script src='/static/lib/bootstrap/js/bootstrap.min.js'></script>
+		<script>
+			
+			// Google Analytics
+			(function(i,s,o,g,r,a,m){i['GoogleAnalyticsObject']=r;i[r]=i[r]||function(){
+			(i[r].q=i[r].q||[]).push(arguments)},i[r].l=1*new Date();a=s.createElement(o),
+			m=s.getElementsByTagName(o)[0];a.async=1;a.src=g;m.parentNode.insertBefore(a,m)
+			})(window,document,'script','//www.google-analytics.com/analytics.js','ga');
+			ga('create', 'UA-2580539-25', 'shanereustle.com');
+			ga('send', 'pageview');
+			
+		</script>
+		
+	</body>
+
+</html>
+

@@ -1,0 +1,23 @@
+# Site settings
+title: Shane Reustle | Adventurer & Entrepreneur
+email: me@shanereustle.com
+description: > # this means to ignore newlines until "baseurl:"
+  Write an awesome description for your new site here. You can edit this
+  line in _config.yml. It will appear in your document head meta
+baseurl: "" # the subpath of your site, e.g. /blog/
+url: "http://shanereustle.com" # the base hostname & protocol for your site
+twitter_username: reustle
+github_username: reustle
+permalink: /blog/:title
+
+# Build settings
+markdown: kramdown
+
+defaults:
+  -
+    scope:
+      path: ""
+      type: "posts"
+    values:
+      layout: "article"
+
