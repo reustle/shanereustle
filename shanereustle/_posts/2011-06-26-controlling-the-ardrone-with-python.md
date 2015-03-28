@@ -8,7 +8,7 @@ The Python API is fairly easy to get up and running as it has no dependencies, u
 
 Once you have cloned the python-ardrone project, turn on the drone and connect to its network. You're now able to run **demo.py** and take it for a spin! If you open up **demo.py**, you'll see that the commands are fairly straight forward. One you've become familiar with the drones commands, let's make the drone fly by itself. To start, create a new file and copy this in.
 
-{% highlight python %}
+{% highlight bash %}
 import libardrone
 from time import sleep
 

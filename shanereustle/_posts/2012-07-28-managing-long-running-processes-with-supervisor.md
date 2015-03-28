@@ -30,7 +30,7 @@ redirect_stderr=true
 
 _Create ~/test.py containing:_
 
-{% highlight python %}
+{% highlight bash %}
 import time
 while True:
 	print(time.ctime())
