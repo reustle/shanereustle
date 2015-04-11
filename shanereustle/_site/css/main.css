@@ -140,12 +140,23 @@
 body {
   padding: 60px 0px; }
 
+/* Bootstrap Overrides */
 .dl-horizontal dt {
   width: 210px;
   line-height: 30px; }
 .dl-horizontal dd {
   margin-left: 220px;
   line-height: 30px; }
+
+/* General */
+.newsletter-photos > div {
+  padding: 0px; }
+  .newsletter-photos > div:first-child img {
+    border-top-left-radius: 6px;
+    border-bottom-left-radius: 6px; }
+  .newsletter-photos > div:last-child img {
+    border-top-right-radius: 6px;
+    border-bottom-right-radius: 6px; }
 
 body > .container {
   line-height: 34px;

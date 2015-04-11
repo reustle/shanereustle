@@ -1,5 +1,6 @@
 ---
 layout: base
+tab: articles
 ---
 
 <h1>{{ page.title }}</h1>

@@ -31,9 +31,9 @@
 							<ul class='nav navbar-nav'>
 								
 								<li><a href='/'>Home</a></li>
-								<li class='active'><a href='/blog/'>Articles</a></li>
-								<!--<li><a href='/photography/'>Photography</a></li>
-								<li><a href='/newsletter'>Newsletter</a></li>-->
+								<li {% if page.tab == 'articles' %}class='active'{% endif %} ><a href='/blog/'>Articles</a></li>
+								<!--<li><a href='/photography/'>Photography</a></li>-->
+								<li {%if page.tab == 'newsletter' %}class='active'{% endif %} ><a href='/newsletter'>Newsletter</a></li>
 								
 							</ul>
 							<ul class='nav navbar-nav navbar-right'>
@@ -41,9 +41,9 @@
 								<li class='drodown'>
 									<a href='#' class='dropdown-toggle' data-toggle='dropdown'>Contact <span class='caret'></span></a>
 									<ul class='dropdown-menu'>
-										<li><a href='mailto:me@shanereustle.com'>Email</a></li>
-										<li><a href='http://facebook.com/shanereustle'>Facebook</a></li>
-										<li><a href='http://twitter.com/reustle'>Twitter</a></li>
+										<li><a href='mailto:me@shanereustle.com' target='_blank'>Email</a></li>
+										<li><a href='http://facebook.com/shanereustle' target='_blank'>Facebook</a></li>
+										<li><a href='http://twitter.com/reustle' target='_blank'>Twitter</a></li>
 									</ul>
 								</li>
 								

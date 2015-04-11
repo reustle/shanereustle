@@ -164,6 +164,7 @@ p {
       text-align: center;
       font-size: 16px; }
     .panel-about .about-content .photos-block {
+      clear: both;
       text-align: center;
       line-height: 0px; }
       .panel-about .about-content .photos-block .photo-box {
