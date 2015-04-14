@@ -15,10 +15,6 @@
 	'filename' : 'photo4-lg.jpg',
 	'title' : 'Aguas Calientes, Peru'
 },{
-	'thumbnail' : 'photo6.jpg',
-	'filename' : 'photo6-lg.jpg',
-	'title' : 'New York City, USA'
-},{
 	'thumbnail' : 'photo5.jpg',
 	'filename' : 'photo5-lg.jpg',
 	'title' : 'Adirondaks, USA'
@@ -34,10 +30,6 @@
 	'thumbnail' : 'photo9.jpg',
 	'filename' : 'photo9-lg.jpg',
 	'title' : '&Aring;rhus, Denmark'
-},{
-	'thumbnail' : 'photo11.jpg',
-	'filename' : 'photo11-lg.jpg',
-	'title' : 'Copenhagen, Denmark'
 },{
 	'thumbnail' : 'photo8.jpg',
 	'filename' : 'photo8-lg.jpg',
