@@ -1,0 +1,99 @@
+---
+# Only the main Sass file needs front matter (the dashes are enough)
+---
+@charset "utf-8";
+
+@import
+	"syntax-highlighting"
+;
+
+body {
+	padding: 60px 0px;
+}
+
+/* Bootstrap Overrides */
+
+.dl-horizontal {
+	dt {
+		width: 210px;
+		line-height: 30px;
+	}
+	dd {
+		margin-left: 220px;
+		line-height: 30px;
+	}
+}
+
+/* General */
+
+.newsletter-photos {
+	>div {
+		padding: 0px;
+		
+		&:first-child {
+			img {
+				border-top-left-radius: 6px;
+				border-bottom-left-radius: 6px;
+			}
+		}
+		
+		&:last-child {
+			img {
+				border-top-right-radius: 6px;
+				border-bottom-right-radius: 6px;
+			}
+		}
+	
+		
+	}
+}
+
+body>.container {
+	line-height: 34px;
+	font-size: 16px;
+	
+	p {
+		padding: 3px 0px;
+	}
+	
+	h1 {
+		font-size: 24px;
+		margin-bottom: 15px;
+		letter-spacing: 1px;
+	}
+	
+	h2 {
+		font-size: 20px;
+		margin-bottom: 2px;
+	}
+	
+	.article-date {
+		font-size: 12px;
+		font-weight: bold;
+		letter-spacing: 1px;
+		text-transform: uppercase;
+		padding-top: 20px;
+	}
+	
+	.footer-action {
+		margin-top: 20px;
+	}
+	
+	.articles-index {
+		ul {
+			line-height: 35px;
+			list-style-type: none;
+			margin: 0px;
+			padding: 0px;
+			
+			em {
+				font-size: 12px;
+				letter-spacing: 1px;
+				padding-left: 10px;
+				color: #888;
+				font-style: inherit;
+			}
+		}
+	}
+}
+

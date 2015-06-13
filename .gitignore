@@ -1,5 +1,6 @@
 .DS_Store
-.sass-cache
-venv
+*.swp
 *.pyc
+_site/
+.sass-cache
 

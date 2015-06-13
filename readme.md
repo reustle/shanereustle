@@ -3,7 +3,11 @@
 The source for shanereustle.com
 
 
-## Overland Travel
+# Running Locally
+``` bundle exec jekyll serve ```
+
+
+# Overland Travel
 
 Asia
 * Shared Taxi: Ubud -> Denpasar
