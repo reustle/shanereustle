@@ -4,7 +4,9 @@ The source for shanereustle.com
 
 
 # Running Locally
-``` bundle exec jekyll serve ```
+```
+bundle exec jekyll serve
+```
 
 
 # Overland Travel
