@@ -3,6 +3,12 @@ layout: base
 tab: articles
 ---
 
+{% if page.draft %}
+<div class='alert alert-warning text-center'>
+	<strong>DRAFT POST</strong>
+</div>
+{% endif %}
+
 <h1>{{ page.title }}</h1>
 
 {{ content }}
