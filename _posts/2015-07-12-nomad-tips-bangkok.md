@@ -1,7 +1,8 @@
 ---
 title: Nomad Tips&#58; Bangkok, Thailand
-draft: true
 ---
+
+<img src='/static/images/articles/sathorn-bkk.jpg' class='img-responsive img-rounded' alt='Sathorn Unique Tower, Bangkok' />
 
 Here are some quick and dirty tips I've picked up while living in the city for a few months. Bangkok is a great city, and you'll fall in love with the expansive night markets and delicious (dirt cheap) street food.
 
@@ -16,8 +17,8 @@ Here are some quick and dirty tips I've picked up while living in the city for a
 
 
 ## Transportation
-* Avoid tuk tuks, they're for tourists and will rip you off. Go for the experience if you wish
-* If you're going to be moving around the city often, pick up a [Rabbit Card](http://www.bts.co.th/customer/en/16-rabbit-step-chg-sky-to-rabbit.aspx) for the BTS to avoid digging for change every time you need to ride. Ask for one at any ticket counter
+* Avoid tuk tuks, they're for tourists and will rip you off. Ride for the experience if you wish
+* If you're going to be moving around the city often, pick up a [Rabbit Card](http://www.bts.co.th/customer/en/16-rabbit-step-chg-sky-to-rabbit.aspx) for the BTS to avoid digging around for change every time you need to ride. Ask for one at any ticket counter
 * BTS note: The last train of the night leaves the origin station at midnight
 * When taking a taxi, make sure they turn the meter on. If they offer you a price, it is probably much higher than what the meter will charge you. Sometimes they won't turn it on, so just get out and find another cab
 
@@ -28,19 +29,10 @@ Here are some quick and dirty tips I've picked up while living in the city for a
 * There are 2 popular coworking spaces, [The Hive](http://thehive.co.th/) and [Hubba](http://hubbathailand.com/), but they're pretty expensive for Bangkok standards
 
 
-## Points of Interest
-* Sathorn Unique
-* Chatichuk / JJ Green Market
-* Nightingale Olympic
-* Car Electronics Market
-* Chinatown Market
-* Train Market
-* River Ferry
-* MBK
-* Board Game Cafe
+## Activities
+* Climb the Ghost Tower, [Sathorn Unique](http://www.atlasobscura.com/places/bangkoks-ghost-tower-the-sathorn-unqiue). This is getting more difficult as more people try to go, but the view is beautiful (picture above)
+* Explore southern Bangkok (Bangkrachao) by bicycle. This is a really cool [monthly event](https://www.couchsurfing.com/events/search?utf8=%E2%9C%93&search_query=Bangkok&latitude=13.783362&longitude=100.342133&country=&region=&start_date=&end_date=&keyword=Bangkrachao)
 
 
-## Misc
-* Summer is HOT, winter is beautiful
-* Bike Ride Event
+<iframe src='https://www.google.com/maps/d/u/0/embed?mid=z6BV6Fbwe-eE.kkyZTtWSzRko' width='100%' height='400' frameBorder='0'></iframe>
 
