@@ -41,5 +41,6 @@ Here are some quick and dirty tips I've picked up while living in the city for a
 
 
 ## Misc
+* Summer is HOT, winter is beautiful
 * Bike Ride Event
 
