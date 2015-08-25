@@ -7,7 +7,7 @@ title: Nomad Tips&#58; Bangkok, Thailand
 Here are some quick and dirty tips I've picked up while living in the city for a few months. Bangkok is a great city, and you'll fall in love with the countless night markets and delicious (dirt cheap) street food.
 
 ## Connectivity
-* Pick up a TRUE sim card and ask for any of the [monthly 4G plans](http://truemoveh.truecorp.co.th/4g/sim-truemoveh/prepaid/entry/3340) (not a tourist plan). They offer a good amount of data for the price such as 300/mo for 2.5gb, 700/mo for 5gb, etc. You'll also get unlimited access to WiFi hotspots all over the city (ie true coffee, see below)
+* Pick up a TRUE sim card and ask for any of the [monthly 4G plans](http://truemoveh.truecorp.co.th/4g/sim-truemoveh/prepaid/entry/3340) (not a tourist plan). They offer a good amount of data for the price such as 300 bhat/mo for 2.5gb, 700 bhat/mo for 5gb, etc. You'll also get unlimited access to WiFi hotspots all over the city (ie true coffee, see below)
 
 
 ## Accomodation
