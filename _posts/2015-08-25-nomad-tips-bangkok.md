@@ -38,6 +38,7 @@ Here are some quick and dirty tips I've picked up while living in the city for a
 * Climb the Ghost Tower, [Sathorn Unique](http://www.atlasobscura.com/places/bangkoks-ghost-tower-the-sathorn-unqiue). This is getting more difficult as more people try to go, but the view is beautiful (picture above)
 * Explore southern Bangkok (Bangkrachao) by bicycle. This is a really cool [monthly event](https://www.couchsurfing.com/events/search?utf8=%E2%9C%93&search_query=Bangkok&latitude=13.783362&longitude=100.342133&country=&region=&start_date=&end_date=&keyword=Bangkrachao)
 
+
 ---
 
 <iframe src='https://www.google.com/maps/d/u/0/embed?mid=z6BV6Fbwe-eE.kkyZTtWSzRko' width='100%' height='400' frameBorder='0'></iframe>
