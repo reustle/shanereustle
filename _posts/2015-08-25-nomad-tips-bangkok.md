@@ -13,7 +13,12 @@ Here are some quick and dirty tips I've picked up while living in the city for a
 ## Accomodation
 * [AirBnB](https://www.airbnb.com/s/Bangkok--Thailand?sublets=monthly) has a bunch of listings for beautiful, cheap monthly apartments
 * If you're just passing through, [Lub d (Siam)](http://siamsquare.lubd.com/) is a clean, cheap hostel in a great location. Helpful staff and plenty of travelers hanging out around the lobby looking for an adventure
-* For something a bit quieter, but still convient, check out [HQ Hostel](http://www.hqhostel.com/)
+* For something a bit quieter, but still convenient, check out [HQ Hostel](http://www.hqhostel.com/)
+
+
+## Neighborhoods
+* Siam is the center of the city. Both train lines meet here, and there are plenty of malls, restaurants, and pepole. I usually stay here so everything I need is within walking distance
+* Ekkamai is also a popular choice, only about 6 km east of Siam. Here is where you'll find the popular coworking spaces and a good number of expats
 
 
 ## Transportation
@@ -26,7 +31,7 @@ Here are some quick and dirty tips I've picked up while living in the city for a
 ## Workspace
 * My favorite place to work in the city is any [TRUE Coffee location](http://truecoffee.truecorp.co.th/). They're all over the place and usually have a few seats open. If you've got a TRUE sim, you'll also have unlimited access to their fast WiFi network
 * [Tom n Toms Coffee](http://en.tomntoms.com/main.php) is a good 24 hour option if you need to crank some work out at 3am
-* There are 2 popular coworking spaces, [The Hive](http://thehive.co.th/) and [Hubba](http://hubbathailand.com/), but they're pretty expensive for Bangkok standards
+* There are 2 popular coworking spaces, [The Hive](http://thehive.co.th/) and [Hubba](http://hubbathailand.com/), but I generally stuck to coffee shops
 
 
 ## Activities
