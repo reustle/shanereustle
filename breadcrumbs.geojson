@@ -1,6 +1,7 @@
 {
 	"type": "FeatureCollection",
 	"features": [
+		
 		{
 			"type": "Feature",
 			"geometry": {
@@ -16,7 +17,24 @@
 				"name": "Bangkok to Chiang Mai",
 				"stroke-width": 15
 			}
-		}
+		},
+		{
+			"type": "Feature",
+			"geometry": {
+				"type": "MultiLineString",
+				"coordinates": [
+					[
+						[100.322415, 6.665437],
+						[100.5171776, 13.7437205]
+					]
+				]
+			},
+			"properties": {
+				"name": "Hat Yai to Bangkok",
+				"stroke-width": 15
+			}
+		},
+		
 	]
 }
 
