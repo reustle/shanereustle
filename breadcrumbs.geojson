@@ -4,10 +4,13 @@
 		{
 			"type": "Feature",
 			"geometry": {
-				"type": "Point",
+				"type": "MultiLineString",
 				"coordinates": [
-					-77.039882,
-					38.898321
+					[
+						[13.743878, 100.517328],
+						[13.821297, 100.546943],
+						[13.934821, 100.609249]
+					]
 				]
 			},
 			"properties": {
