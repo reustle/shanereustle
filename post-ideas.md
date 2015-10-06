@@ -1,5 +1,8 @@
 Random article ideas that pop into my head
 
+# One year without an alarm clock
+I feel much better
+
 # Don't submit a resume and move on
 Job applications and resumes are for cogs in a machine.  Talk to people and show them the value you'd bring to their (small) company
 
