@@ -14,9 +14,8 @@
 				]
 			},
 			"properties": {
-				"marker-symbol": "bar",
-				"name": "Test point",
-				"address": "1719 G St NW"
+				"name": "Bangkok to Chiang Mai",
+				"stroke-width": 1
 			}
 		}
 	]
