@@ -1,5 +1,13 @@
 Random article ideas that pop into my head
 
+# Don't submit a resume and move on
+Job applications and resumes are for cogs in a machine.  Talk to people and show them the value you'd bring to their (small) company
+
+
+# Everyone is a politician
+Why does everyone need to be a politician? I don't care, and I dont need to.
+
+
 # Oh its so expensive everywhere
 It can be cheap or expensive anywhere
 

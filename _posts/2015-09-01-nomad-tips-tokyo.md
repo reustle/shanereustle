@@ -32,7 +32,7 @@ related: http://www.thrillingheroics.com/tokyo-japan
 
 # Cheap Stuff
 * F Treasure
-* Donkey Hotel
+* Don Quijote (Donkey Hotel)
 * http://tokyocheapo.com/shopping-2/fashion/secondhand-tokyo-thriftin-guide/
 
 
