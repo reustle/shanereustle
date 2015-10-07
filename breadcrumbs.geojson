@@ -142,6 +142,24 @@
 					[114.43702697753906, -8.162895544646553]
 				]
 			}
+		},
+		
+		{
+			"type": "Feature",
+			"properties": {
+				"name": "Denpasar to Gilimanuk",
+				"mode": "bus",
+				"stroke": "#27a600",
+				"stroke-width": 10,
+				"stroke-opacity": 1
+			},
+			"geometry": {
+				"type": "LineString",
+				"coordinates": [
+					[114.43531036376953, -8.170202131138428],
+					[115.21636962890625, -8.66520278080852]
+				]
+			}
 		}
 		
 	]
