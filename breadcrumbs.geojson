@@ -106,8 +106,43 @@
 					[106.820068359375, -6.162400921526583]
 				]
 			}
+		},
+		
+		{
+			"type": "Feature",
+			"properties": {
+				"name": "Banyuwangi to Jakarta",
+				"mode": "train",
+				"stroke-width": 10,
+				"stroke-opacity": 1
+			},
+			"geometry": {
+				"type": "LineString",
+				"coordinates": [
+					[106.79809570312499, -6.206090498573885],
+					[112.73071289062499, -7.231698708367139],
+					[114.3731689453125, -8.200616482608327]
+				]
+			}
+		},
+		
+		{
+			"type": "Feature",
+			"properties": {
+				"name": "Gilimanuk, Bali to Banyuwangi, Java",
+				"mode": "boat",
+				"stroke": "#005ebc",
+				"stroke-width": 10,
+				"stroke-opacity": 1
+			},
+			"geometry": {
+				"type": "LineString",
+				"coordinates": [
+					[114.4002914428711, -8.143184086891377],
+					[114.43702697753906, -8.162895544646553]
+				]
+			}
 		}
-	
 		
 	]
 }
