@@ -24,7 +24,7 @@
 				"name": "Hat Yai to Bangkok",
 				"stroke-width": 10,
 				"stroke-opacity": 1
-			}
+			},
 			"geometry": {
 				"type": "LineString",
 				"coordinates": [
@@ -40,7 +40,7 @@
 				"name": "Hat Yai to Johor Bahru",
 				"stroke-width": 10,
 				"stroke-opacity": 1
-			}
+			},
 			"geometry": {
 				"type": "LineString",
 				"coordinates": [
