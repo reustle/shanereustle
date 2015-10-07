@@ -6,6 +6,7 @@
 			"type": "Feature",
 			"properties": {
 				"name": "Bangkok to Chiang Mai",
+				"mode": "train",
 				"stroke-width": 10,
 				"stroke-opacity": 1
 			},
@@ -22,6 +23,7 @@
 			"type": "Feature",
 			"properties": {
 				"name": "Hat Yai to Bangkok",
+				"mode": "train",
 				"stroke-width": 10,
 				"stroke-opacity": 1
 			},
@@ -37,7 +39,8 @@
 		{
 			"type": "Feature",
 			"properties": {
-				"name": "Hat Yai to Johor Bahru",
+				"name": "Johor Bahru to Hat Yai",
+				"mode": "train",
 				"stroke-width": 10,
 				"stroke-opacity": 1
 			},
@@ -49,7 +52,62 @@
 					[100.32302856445312, 6.665119066046462]
 				]
 			}
+		},
+		
+		{
+			"type": "Feature",
+			"properties": {
+				"name": "Singapore to Johor Bahru",
+				"mode": "train",
+				"stroke-width": 10,
+				"stroke-opacity": 1
+			},
+			"geometry": {
+				"type": "LineString",
+				"coordinates": [
+					[104.00894165039062, 1.1164149441630258],
+					[103.88671875, 1.2962761196418089]
+				]
+			}
+		},
+		
+		{
+			"type": "Feature",
+			"properties": {
+				"name": "Batam to Singapore",
+				"mode": "boat",
+				"stroke": "#005ebc",
+				"stroke-width": 10,
+				"stroke-opacity": 1
+			},
+			"geometry": {
+				"type": "LineString",
+				"coordinates": [
+					[104.00894165039062, 1.1164149441630258],
+					[103.88671875, 1.2962761196418089]
+				]
+			}
+		},
+		
+		{
+			"type": "Feature",
+			"properties": {
+				"name": "Jakarta to Batam",
+				"mode": "boat",
+				"stroke": "#005ebc",
+				"stroke-width": 10,
+				"stroke-opacity": 1
+			},
+			"geometry": {
+				"type": "LineString",
+				"coordinates": [
+					[104.02679443359375, 1.1013115719664264],
+					[107.26501464843749, -2.8772079526533365],
+					[106.820068359375, -6.162400921526583]
+				]
+			}
 		}
+	
 		
 	]
 }
