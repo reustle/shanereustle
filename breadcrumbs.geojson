@@ -4,34 +4,50 @@
 		
 		{
 			"type": "Feature",
-			"geometry": {
-				"type": "MultiLineString",
-				"coordinates": [
-					[
-						[100.5171776, 13.7437205],
-						[99.0170288, 18.781923]
-					]
-				]
-			},
 			"properties": {
 				"name": "Bangkok to Chiang Mai",
-				"stroke-width": 15
+				"stroke-width": 10,
+				"stroke-opacity": 1
+			},
+			"geometry": {
+				"type": "LineString",
+				"coordinates": [
+					[100.5171776, 13.7437205],
+					[99.0170288, 18.781923]
+				]
 			}
 		},
+		
 		{
 			"type": "Feature",
-			"geometry": {
-				"type": "MultiLineString",
-				"coordinates": [
-					[
-						[100.322415, 6.665437],
-						[100.5171776, 13.7437205]
-					]
-				]
-			},
 			"properties": {
 				"name": "Hat Yai to Bangkok",
-				"stroke-width": 15
+				"stroke-width": 10,
+				"stroke-opacity": 1
+			}
+			"geometry": {
+				"type": "LineString",
+				"coordinates": [
+					[100.322415, 6.665437],
+					[100.5171776, 13.7437205]
+				]
+			}
+		},
+		
+		{
+			"type": "Feature",
+			"properties": {
+				"name": "Hat Yai to Johor Bahru",
+				"stroke-width": 10,
+				"stroke-opacity": 1
+			}
+			"geometry": {
+				"type": "LineString",
+				"coordinates": [
+					[103.7691307067871, 1.4527003950877018],
+					[101.6455078125, 3.1076061013287033],
+					[100.32302856445312, 6.665119066046462]
+				]
 			}
 		}
 		
