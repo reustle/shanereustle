@@ -31,7 +31,7 @@ Here are some quick and dirty tips I've picked up while living in the city for a
 ## Workspace
 * My favorite place to work in the city is any [TRUE Coffee location](http://truecoffee.truecorp.co.th/). They're all over the place and usually have a few seats open. If you've got a TRUE sim, you'll also have unlimited access to their fast WiFi network
 * [Tom n Toms Coffee](http://en.tomntoms.com/main.php) is a good 24 hour option if you need to crank some work out at 3am
-* There are 2 popular coworking spaces, [The Hive](http://thehive.co.th/) and [Hubba](http://hubbathailand.com/), but I generally stuck to coffee shops
+* There are 2 popular coworking spaces, [The Hive](http://thehive.co.th/) and [Hubba](http://hubbathailand.com/), but are a bit of a hike from the nearest BTS stations
 
 
 ## Activities
