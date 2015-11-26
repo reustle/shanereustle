@@ -18,7 +18,7 @@ Here are some quick and dirty tips I've picked up while living in the city for a
 
 ## Neighborhoods
 * Siam is the center of the city. Both train lines meet here, and there are plenty of malls, restaurants, and pepole. I usually stay here so everything I need is within walking distance
-* Ekkamai is also a popular choice, only about 6 km east of Siam. Here is where you'll find the popular coworking spaces and a good number of expats
+* Ekkamai and Thonglor are also a popular choice, only about 6 km east of Siam. Here is where you'll find the popular coworking spaces and plenty of expats
 
 
 ## Transportation
