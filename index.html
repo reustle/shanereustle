@@ -16,8 +16,6 @@
 		<link href='/static/lib/bootstrap/css/bootstrap.min.css' type='text/css' rel='stylesheet'>
 		<link href='/css/landing.css' type='text/css' rel='stylesheet'>
 		
-		<link href='/static/lib/lightbox/lightbox.css' type='text/css' rel='stylesheet'>
-		
 		<!-- HTML5 shim and Respond.js IE8 support of HTML5 elements and media queries -->
 		<!--[if lt IE 9]>
 			<script src='https://oss.maxcdn.com/libs/html5shiv/3.7.0/html5shiv.js'></script>
@@ -26,6 +24,9 @@
 	</head>
 	
 	<body>
+		<script>
+			window.location = 'http://reustle.org';
+		</script>
 		
 		<div class='panel-land' id='home'>
 			<div class='down-arrow-container animated bounce'>
@@ -51,12 +52,20 @@
 				<div class='col-md-12 photos-block'>
 					
 					{% for photo in site.data.photos %}
-						<a href='/static/images/photos/{{ photo.filename }}' data-lightbox='photos' class='photo-box' data-title='{{ photo.title }}'>
+						<a href='/static/images/photos/{{ photo.filename }}' class='photo-box' data-title='{{ photo.title }}'>
 							<div class='photo-title animated'>{{ photo.title }}</div>
 							<img src='/static/images/photos/{{ photo.thumbnail }}' class='img-responsive'/>
 						</a>
 					{% endfor %}
 					
+					<div id="fb-root"></div>
+					<script>
+						(function(d, s, id) {  var js, fjs = d.getElementsByTagName(s)[0];  if (d.getElementById(id)) return;  js = d.createElement(s); js.id = id;  js.src = "//connect.facebook.net/en_US/sdk.js#xfbml=1&version=v2.3";  fjs.parentNode.insertBefore(js, fjs);}(document, 'script', 'facebook-jssdk'));
+					</script>
+					
+					<div class="fb-post" data-href="https://www.facebook.com/photo.php?fbid=914682215253086&amp;set=a.822372551150720.1073741833.100001339471339&amp;type=3" data-width="100%"></div>
+					<div class="fb-post" data-href="https://www.facebook.com/photo.php?fbid=914296495291658&amp;set=p.914296495291658&amp;type=3" data-width="100%"></div>
+				
 				</div>
 				
 				<div class='about-block'>
@@ -79,7 +88,6 @@
 		
 		<script src='/static/lib/jquery-1.11.1.min.js'></script>
 		<script src='/static/lib/bootstrap/js/bootstrap.min.js'></script>
-		<script src='/static/lib/lightbox/lightbox.min.js'></script>
 		
 		<script>
 			
@@ -90,15 +98,6 @@
 			})(window,document,'script','//www.google-analytics.com/analytics.js','ga');
 			ga('create', 'UA-2580539-25', 'shanereustle.com');
 			ga('send', 'pageview');
-			
-			// Photo Hover Effect
-			$('.photo-box').mouseover(function(){
-				$(this).find('.photo-title').removeClass('fadeOut').addClass('fadeIn').show();
-			});
-			
-			$('.photo-box').mouseout(function(){
-				$(this).find('.photo-title').removeClass('fadeIn').addClass('fadeOut');
-			});
 			
 		</script>
 	</body>
